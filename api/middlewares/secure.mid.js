@@ -10,5 +10,5 @@ module.exports.cleanBody = (req, res, next) => {
     delete req.body.loyaltyCode;
   }
 
-  next()
+  next();
 }
