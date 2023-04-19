@@ -5,6 +5,7 @@ const logger = require('morgan'); //shows http requests in the terminal
 const mongoose = require('mongoose');
 const createError = require('http-errors');
 const helmet = require('helmet'); //helps secure by setting various HTTP headers
+const secure = require('./middlewares/secure.mid');
 
 /* Load configuration */
 require('./config/db.config');
@@ -14,6 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(logger('dev')); //morgan's middleware
 app.use(helmet()); //helmet's middleware 
+app.use(secure.cleanBody); //deletes inputs from req.body
 
 app.use('/api/v1', require('./config/routes.config')); //configures the router
 
@@ -27,9 +29,9 @@ app.use((error, req, res, next) => {
   } else if (error instanceof mongoose.Error.CastError && error.path === '_id') { //invalid id
     const resourceName = error.model().constructor.modelName;
     error = createError(404, `${resourceName} not found`);
-  } else if (error.message.includes("E11000")) { // Duplicate keys
+  } else if (error.message.includes("E11000")) { // duplicated keys
     Object.keys(error.keyValue).forEach((key) => error.keyValue[key] = 'Already exists');
-    error = createError(409, { errors: error.keyValue });
+    error = createError(409, { errors: error.keyValue }); //409 Conflict Error
   } else if(!error.status) {
     error = createError(500, error);
   };
