@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 const validations = require('../utils/validations');
 
 const userSchema = new Schema({
@@ -66,21 +67,39 @@ const userSchema = new Schema({
   }
 });
 
-projectSchema.virtual("favs", {
+userSchema.pre('save', function (next) {
+  const user = this;
+
+  if (user.isModified('password')) {
+    bcrypt.genSalt(10)
+      .then(salt => {
+        return bcrypt.hash(user.password, salt)
+          .then(hash => {
+            user.password = hash;
+            next();
+          })
+      })
+      .catch(error => next(error));
+  } else {
+    next();
+  }
+});
+
+userSchema.virtual("favs", {
   ref: "Fav",
   localField: "_id",
   foreignField: "user",
   justOne: false
 });
 
-projectSchema.virtual("reviews", {
+userSchema.virtual("reviews", {
   ref: "Review",
   localField: "_id",
   foreignField: "user",
   justOne: false
 });
 
-projectSchema.virtual("visits", {
+userSchema.virtual("visits", {
   ref: "Visit",
   localField: "_id",
   foreignField: "user",
