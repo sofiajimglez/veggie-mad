@@ -8,7 +8,6 @@ const userSchema = new Schema({
     required:[true, 'Por favor, establece un alias'],
     minlength: [3, 'Mínimo 3 caracteres'],
     maxlength: [10, 'Máximo 10 caracteres'],
-    trim: true,
     lowercase: true,
     match: [/^[a-z0-9]+$/, 'Por favor, introduce solo letras minúsuculas o números sin espacios'],
     unique: true, 
@@ -65,7 +64,28 @@ const userSchema = new Schema({
       return ret;
     }
   }
-})
+});
+
+projectSchema.virtual("favs", {
+  ref: "Fav",
+  localField: "_id",
+  foreignField: "user",
+  justOne: false
+});
+
+projectSchema.virtual("reviews", {
+  ref: "Review",
+  localField: "_id",
+  foreignField: "user",
+  justOne: false
+});
+
+projectSchema.virtual("visits", {
+  ref: "Visit",
+  localField: "_id",
+  foreignField: "user",
+  justOne: false
+});
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
