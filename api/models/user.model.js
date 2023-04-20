@@ -51,7 +51,7 @@ const userSchema = new Schema({
   },
   confirm: {
     type: Boolean,
-    default: process.env.USER_CONFIRMATION_REQUIRED === 'false'
+    default: process.env.USER_CONFIRMATION_REQUIRED === 'true' //TODO: change to false
   }
 }, { 
   timestamps: true,
@@ -62,20 +62,20 @@ const userSchema = new Schema({
       ret.id = ret._id;
       delete ret._id;
       delete ret.password;
+      delete ret.confirm;
+      delete ret.privacy;
       return ret;
     }
   }
 });
 
 userSchema.pre('save', function (next) {
-  const user = this;
-
-  if (user.isModified('password')) {
+  if (this.isModified('password')) {
     bcrypt.genSalt(10)
       .then(salt => {
-        return bcrypt.hash(user.password, salt)
+        return bcrypt.hash(this.password, salt)
           .then(hash => {
-            user.password = hash;
+            this.password = hash;
             next();
           })
       })
@@ -84,6 +84,10 @@ userSchema.pre('save', function (next) {
     next();
   }
 });
+
+userSchema.methods.checkPassword = function (password) {
+  return bcrypt.compare(password, this.password);
+}
 
 userSchema.virtual("favs", {
   ref: "Fav",

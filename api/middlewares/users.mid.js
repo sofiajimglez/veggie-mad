@@ -13,3 +13,11 @@ module.exports.exists = (req, res, next) => {
     })
     .catch(next)
 };
+
+module.exports.isOwned = (req, res, next) => {
+  if (req.user.id !== req.loggedUser.id) {
+    return next(createError(403, 'No tienes permiso para realizar esta acción'));
+  } else {
+    next();
+  }
+}
