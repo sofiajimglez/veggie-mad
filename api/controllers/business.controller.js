@@ -6,6 +6,14 @@ const createError = require('http-errors');
 const jwt = require('jsonwebtoken');
 
 module.exports.create = (req, res, next) => {
+  const { lat, lng } = req.body;
+  if (lat && lng) { //transforms data from form to the format needed by mongoose
+    req.body.location = {
+      type: 'Point',
+      coordinates: [lng, lat]
+    }
+  }
+
   req.body.loyaltyCode = generateLoyaltyCode(); //creates random code
 
   Business.create(req.body)

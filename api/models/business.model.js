@@ -49,9 +49,18 @@ const businessSchema = new Schema({
     }
   },
   tags: [String],
-  location: {
+  address: {
     type: String,
-    //TODO: Google Maps API
+    required: [true, 'La dirección es obligatoria']
+  },
+  location: {
+    type: {
+      type: String,
+      enum: ['Point']
+    },
+    coordinates: {
+      type: [Number]
+    }
   },
   imageUrl: {
     type: String,
@@ -138,6 +147,8 @@ businessSchema.pre('save', function (next) {
     next();
   }
 });
+
+businessSchema.index({ location: '2dsphere' });
 
 businessSchema.methods.checkPassword = function (password) {
   return bcrypt.compare(password, this.password);

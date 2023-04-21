@@ -29,9 +29,18 @@ const userSchema = new Schema({
     trim: true,
     minlength: [8, 'Mínimo 8 caracteres']
   }, 
-  location: {
+  address: {
     type: String,
-    //TODO: Google Maps API
+    required: [true, 'La dirección es obligatoria']
+  },
+  location: {
+    type: {
+      type: String,
+      enum: ['Point']
+    },
+    coordinates: {
+      type: [Number]
+    }
   },
   imageUrl: {
     type: String,
@@ -89,6 +98,8 @@ userSchema.pre('save', function (next) {
     next();
   }
 });
+
+userSchema.index({ location: '2dsphere' });
 
 userSchema.methods.checkPassword = function (password) {
   return bcrypt.compare(password, this.password);
