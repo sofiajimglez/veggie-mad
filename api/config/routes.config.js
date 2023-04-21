@@ -19,6 +19,7 @@ router.get('/businesses', businesses.list);
 router.get('/businesses/:id', businessMid.exists, businesses.detail);
 router.patch('/businesses/:id', secure.businessAuth, businessMid.exists, businessMid.isOwned, businesses.update);
 router.delete('/businesses/:id', secure.businessAuth, businessMid.exists, businessMid.isOwned, businesses.delete);
+router.post('/businesses/:id/fav', secure.userAuth, businessMid.exists, businesses.toggleFav);
 
 /* Login routes */
 router.post('/login/users', users.login);

@@ -1,4 +1,6 @@
 const Business = require('../models/business.model');
+const Fav = require('../models/Fav.model');
+
 const { generateLoyaltyCode } = require('../utils/loyaltyCode');
 const createError = require('http-errors');
 const jwt = require('jsonwebtoken');
@@ -13,7 +15,7 @@ module.exports.create = (req, res, next) => {
 
 module.exports.list = (req, res, next) => {
   Business.find()
-    //.populate('favs reviews visits')
+    .populate('favs')
     .then(businesses => res.json(businesses))
     .catch(next)
 }
@@ -51,6 +53,25 @@ module.exports.login = (req, res, next) => {
           const token = jwt.sign({ sub: business.id, exp: Date.now() / 1000 + 3_600 }, process.env.JWT_SECRET) //generates a token for authentication that expirates
           res.json({ token });
         });
+    })
+    .catch(next);
+};
+
+module.exports.toggleFav = (req, res, next) => {
+  const params = {
+    user: req.loggedUser.id,
+    business: req.business.id
+  };
+
+  Fav.findOne(params)
+    .then(fav => {
+      if (fav) { //if exists, it's deleted
+        return Fav.deleteOne({ _id: fav.id })
+          .then(() => res.status(204).send());
+      } else { //if doesn't exist, it's created
+        return Fav.create(params)
+          .then(fav => res.json(fav));
+      };
     })
     .catch(next);
 };
