@@ -6,3 +6,7 @@ module.exports.isValidUrl = (url) => {
     return false;
   }
 }
+
+module.exports.isAccepted = (value) => {
+  return value === true;
+}

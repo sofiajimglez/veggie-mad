@@ -43,7 +43,12 @@ const userSchema = new Schema({
   },
   privacy: {
     type: Boolean,
-    default: false
+    default: false,
+    required: true,
+    validate: {
+      validator: validations.isAccepted,
+      message: 'Tienes que aceptar nuestra Política de Privacidad para crear tu cuenta'
+    }
   },
   points: {
     type: Number,

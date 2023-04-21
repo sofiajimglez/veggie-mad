@@ -92,7 +92,11 @@ const businessSchema = new Schema({
   privacy: {
     type: Boolean,
     default: false,
-    required: [true, 'Tienes que aceptar nuestra Política de Privacidad para crear tu cuenta']
+    required: true,
+    validate: {
+      validator: validations.isAccepted,
+      message: 'Tienes que aceptar nuestra Política de Privacidad para crear tu cuenta'
+    }
   },
   loyaltyCode: {
     type: String,
