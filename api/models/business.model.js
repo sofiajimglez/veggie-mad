@@ -104,7 +104,7 @@ const businessSchema = new Schema({
   },
   confirm: {
     type: Boolean,
-    default: process.env.USER_CONFIRMATION_REQUIRED === 'false'
+    default: process.env.BUSINESS_CONFIRMATION_REQUIRED === 'true' //TODO: change to false
   }
 }, { 
   timestamps: true,
@@ -138,6 +138,10 @@ businessSchema.pre('save', function (next) {
     next();
   }
 });
+
+businessSchema.methods.checkPassword = function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 businessSchema.virtual('favs', {
   ref: 'Fav',

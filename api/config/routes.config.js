@@ -17,11 +17,12 @@ router.delete('/users/:id', secure.userAuth, usersMid.exists, usersMid.isOwned, 
 router.post('/businesses', businesses.create);
 router.get('/businesses', businesses.list);
 router.get('/businesses/:id', businessMid.exists, businesses.detail);
-router.patch('/businesses/:id', businessMid.exists, businesses.update);
-router.delete('/businesses/:id', businessMid.exists, businesses.delete);
+router.patch('/businesses/:id', secure.businessAuth, businessMid.exists, businessMid.isOwned, businesses.update);
+router.delete('/businesses/:id', secure.businessAuth, businessMid.exists, businessMid.isOwned, businesses.delete);
 
 /* Login routes */
 router.post('/login/users', users.login);
+router.post('/login/businesses', businesses.login);
 
 
 module.exports = router;

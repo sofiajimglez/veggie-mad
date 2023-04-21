@@ -1,5 +1,7 @@
 const Business = require('../models/business.model');
 const { generateLoyaltyCode } = require('../utils/loyaltyCode');
+const createError = require('http-errors');
+const jwt = require('jsonwebtoken');
 
 module.exports.create = (req, res, next) => {
   req.body.loyaltyCode = generateLoyaltyCode(); //creates random code
@@ -30,3 +32,25 @@ module.exports.delete = (req, res, next) => {
     .then(() => res.status(204).send())
     .catch(next)
 }
+
+module.exports.login = (req, res, next) => {
+  Business.findOne({ username: req.body.username })
+    .then((business) => {
+      if (!business || !req.body.password) {
+        return next(createError(401, 'Por favor, revisa el nombre de usuario y la contraseña'));
+      };
+
+      business.checkPassword(req.body.password) //checkPassword is defined in the model
+        .then((match) => {
+          if (!match) {
+            return next(createError(401, 'Por favor, revisa el nombre de usuario y la contraseña'));
+          } else if (!business.confirm) {
+            return next(createError(401, 'Revisa tu bandeja de entrada y confirma tu cuenta para acceder'));
+          };
+
+          const token = jwt.sign({ sub: business.id, exp: Date.now() / 1000 + 3_600 }, process.env.JWT_SECRET) //generates a token for authentication that expirates
+          res.json({ token });
+        });
+    })
+    .catch(next);
+};
