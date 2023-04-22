@@ -3,6 +3,9 @@ const createError = require('http-errors');
 
 module.exports.exists = (req, res, next) => {
   Business.findById(req.params.id)
+    .populate({ path: 'favs', populate: 'user' })
+    .populate({ path: 'visits', populate: 'user' })
+    .populate({ path: 'reviews', populate: 'user' })
     .then(business => {
       if (business) {
         req.business = business;

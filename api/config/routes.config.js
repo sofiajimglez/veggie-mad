@@ -3,6 +3,7 @@ const router = express.Router();
 
 const users = require('../controllers/users.controller');
 const businesses = require('../controllers/business.controller');
+const fav = require('../controllers/fav.controller');
 const review = require('../controllers/reviews.controller');
 const visit = require('../controllers/visits.controller');
 
@@ -23,7 +24,7 @@ router.get('/businesses/:id', businessMid.exists, businesses.detail);
 router.patch('/businesses/:id', secure.businessAuth, businessMid.exists, businessMid.isOwned, businesses.update);
 router.delete('/businesses/:id', secure.businessAuth, businessMid.exists, businessMid.isOwned, businesses.delete);
 
-router.post('/businesses/:id/fav', secure.userAuth, businessMid.exists, businesses.toggleFav);
+router.post('/businesses/:id/fav', secure.userAuth, businessMid.exists, fav.toggle);
 
 router.post('/businesses/:id/visit', secure.userAuth, businessMid.exists, visit.create);
 
