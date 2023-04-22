@@ -10,7 +10,6 @@ module.exports.cleanBody = (req, res, next) => { //deletes inputs from req.body 
     delete req.body.updatedAt;
     delete req.body.confirm;
     delete req.body.points;
-    delete req.body.loyaltyCode;
   }
   next();
 }

@@ -1,5 +1,4 @@
 const Business = require('../models/business.model');
-const User = require('../models/user.model');
 const Fav = require('../models/Fav.model');
 
 const { generateLoyaltyCode } = require('../utils/loyaltyCode');
@@ -13,7 +12,7 @@ module.exports.create = (req, res, next) => {
       type: 'Point',
       coordinates: [lng, lat]
     }
-  }
+  };
 
   req.body.loyaltyCode = generateLoyaltyCode(); //creates random code
 
@@ -32,6 +31,7 @@ module.exports.list = (req, res, next) => {
 module.exports.detail = (req, res, next) => res.json(req.business);
 
 module.exports.update = (req, res, next) => {
+  delete req.body.loyaltyCode;
   Object.assign(req.business, req.body);
   req.business.save()
     .then(business => res.json(business))
@@ -89,3 +89,4 @@ module.exports.toggleFav = (req, res, next) => {
     })
     .catch(next);
 };
+

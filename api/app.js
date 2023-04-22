@@ -23,7 +23,6 @@ app.use('/api/v1', require('./config/routes.config')); //configures the router
 app.use((req, res, next) => next(createError(404, 'Route not found')));
 
 app.use((error, req, res, next) => {
-  console.log('hola', error);
   if (error instanceof mongoose.Error.ValidationError) {
     error = createError(400, error); //reassigns the value of error
   } else if (error instanceof mongoose.Error.CastError && error.path === '_id') { //invalid id
