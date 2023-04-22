@@ -11,7 +11,12 @@ module.exports.create = (req, res, next) => {
 
   if (req.loggedUser.points >= 10) {
     Review.create(params)
-      .then(review => res.status(201).json(review))
+      .then(review => {
+        const { points } = req.loggedUser;
+        Object.assign(req.loggedUser, { points: points + 4 });
+        return req.loggedUser.save()
+          .then(() => res.status(201).json(review));
+        })
       .catch(next);
   } else {
     return next(createError(403, 'Necesitas al menos 10 puntos para realizar esta acción'));
