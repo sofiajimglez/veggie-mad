@@ -24,7 +24,7 @@ module.exports.create = (req, res, next) => {
 
 module.exports.list = (req, res, next) => {
   Business.find()
-    .populate('favs')
+    .populate('favs reviews')
     .then(businesses => res.json(businesses))
     .catch(next)
 }

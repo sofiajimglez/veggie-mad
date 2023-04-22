@@ -18,7 +18,7 @@ module.exports.create = (req, res, next) => {
 
 module.exports.detail = (req, res, next) => {
   User.findById(req.user.id)
-    .populate('favs')
+    .populate('favs reviews')
     .then(user => res.json(user))
     .catch(next);
 };

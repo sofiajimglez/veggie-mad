@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const users = require('../controllers/users.controller');
 const businesses = require('../controllers/business.controller');
+const review = require('../controllers/reviews.controller');
 
 const usersMid = require('../middlewares/users.mid');
 const businessMid = require('../middlewares/business.mid');
@@ -19,7 +20,12 @@ router.get('/businesses', businesses.list);
 router.get('/businesses/:id', businessMid.exists, businesses.detail);
 router.patch('/businesses/:id', secure.businessAuth, businessMid.exists, businessMid.isOwned, businesses.update);
 router.delete('/businesses/:id', secure.businessAuth, businessMid.exists, businessMid.isOwned, businesses.delete);
+
 router.post('/businesses/:id/fav', secure.userAuth, businessMid.exists, businesses.toggleFav);
+
+router.post('/businesses/:id/review', secure.userAuth, businessMid.exists, review.create);
+router.patch('/businesses/:id/review/:reviewId', secure.userAuth, businessMid.exists, review.update);
+router.delete('/businesses/:id/review/:reviewId', secure.userAuth, businessMid.exists, review.delete);
 
 /* Login routes */
 router.post('/login/users', users.login);
