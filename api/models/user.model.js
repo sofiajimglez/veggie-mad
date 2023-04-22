@@ -61,7 +61,7 @@ const userSchema = new Schema({
   },
   points: {
     type: Number,
-    default: 0
+    default: 5
   },
   confirm: {
     type: Boolean,
@@ -103,7 +103,7 @@ userSchema.index({ location: '2dsphere' });
 
 userSchema.methods.checkPassword = function (password) {
   return bcrypt.compare(password, this.password);
-}
+};
 
 userSchema.virtual("favs", {
   ref: "Fav",

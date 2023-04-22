@@ -1,4 +1,5 @@
 const Business = require('../models/business.model');
+const User = require('../models/user.model');
 const Fav = require('../models/Fav.model');
 
 const { generateLoyaltyCode } = require('../utils/loyaltyCode');
@@ -78,7 +79,12 @@ module.exports.toggleFav = (req, res, next) => {
           .then(() => res.status(204).send());
       } else { //if doesn't exist, it's created
         return Fav.create(params)
-          .then(fav => res.json(fav));
+          .then(fav => {
+            const { points } = req.loggedUser;
+            Object.assign(req.loggedUser, { points: points + 2 });
+            return req.loggedUser.save()
+              .then(() => res.json(fav));
+          });
       };
     })
     .catch(next);
