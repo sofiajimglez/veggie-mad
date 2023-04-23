@@ -2,7 +2,6 @@ require('dotenv').config();
 
 const express = require('express');
 const logger = require('morgan'); //shows http requests in the terminal
-const mongoose = require('mongoose');
 const createError = require('http-errors');
 const helmet = require('helmet'); //helps secure by setting various HTTP headers
 const secure = require('./middlewares/secure.mid');
@@ -20,37 +19,8 @@ app.use(secure.cleanBody); //deletes inputs from req.body
 app.use('/api/v1', require('./config/routes.config')); //configures the router
 
 /* Error handling */
-app.use((req, res, next) => next(createError(404, 'Route not found')));
-
-app.use((error, req, res, next) => {
-  if (error instanceof mongoose.Error.ValidationError) {
-    error = createError(400, error); //reassigns the value of error
-  } else if (error instanceof mongoose.Error.CastError && error.path === '_id') { //invalid id
-    const resourceName = error.model().constructor.modelName;
-    error = createError(404, `${resourceName} not found`);
-  } else if (error.message.includes("E11000")) { // duplicated keys
-    Object.keys(error.keyValue).forEach((key) => error.keyValue[key] = 'Already exists');
-    error = createError(409, { errors: error.keyValue }); //409 Conflict Error
-  } else if(!error.status) {
-    error = createError(500, error);
-  };
-
-  console.error(error);
-
-  const data = {
-    message: error.message
-  };
-
-  if (error.errors) {
-    const errors = Object.keys(error.errors).reduce((errors, errorKey) => { //each key is the name of the field with validation errors
-      errors[errorKey] = error.errors[errorKey]?.message || error.errors[errorKey]; //(accumulator, currentValue) - currentValue: key
-      return errors;
-    }, {});
-    data.errors = errors;
-  };
-
-  res.status(error.status).json(data);
-})
+app.use((req, res, next) => next(createError(404, 'Ruta no encontrada')));
+app.use('/api/v1', require('./middlewares/errors.mid'));
 
 /* Port */
 const port = process.env.PORT || '3001';
