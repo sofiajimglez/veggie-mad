@@ -31,6 +31,13 @@ module.exports.detail = (req, res, next) => res.json(req.business);
 
 module.exports.update = (req, res, next) => {
   delete req.body.loyaltyCode;
+
+  if (req.file) {
+    req.body.imageUrl = req.file.path;
+  } else if (req.files) {
+    req.body.gallery = req.files.map(file => file.path);
+  };
+
   Object.assign(req.business, req.body);
   req.business.save()
     .then(business => res.json(business))

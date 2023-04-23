@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const storage = require('../config/storage.config');
+
 const users = require('../controllers/users.controller');
 const businesses = require('../controllers/business.controller');
 const fav = require('../controllers/fav.controller');
@@ -12,13 +14,13 @@ const businessMid = require('../middlewares/business.mid');
 const secure = require('../middlewares/secure.mid')
 
 /* User routes */
-router.post('/users', users.create);
+router.post('/users', storage.single('imageUrl'), users.create);
 router.get('/users/:id', secure.userAuth, usersMid.exists, usersMid.isOwned, users.detail);
 router.patch('/users/:id', secure.userAuth, usersMid.exists, usersMid.isOwned, users.update);
 router.delete('/users/:id', secure.userAuth, usersMid.exists, usersMid.isOwned, users.delete);
 
 /* Business routes */
-router.post('/businesses', businesses.create);
+router.post('/businesses', storage.single('imageUrl'), storage.array('gallery'), businesses.create);
 router.get('/businesses', businesses.list);
 router.get('/businesses/:id', businessMid.exists, businesses.detail);
 router.patch('/businesses/:id', secure.businessAuth, businessMid.exists, businessMid.isOwned, businesses.update);

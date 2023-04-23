@@ -19,6 +19,10 @@ module.exports.create = (req, res, next) => {
 module.exports.detail = (req, res, next) => res.json(req.user);
 
 module.exports.update = (req, res, next) => {
+  if (req.file) {
+    req.body.imageUrl = req.file.path;
+  };
+
   Object.assign(req.user, req.body);
   req.user.save()
     .then(user => res.json(user))
