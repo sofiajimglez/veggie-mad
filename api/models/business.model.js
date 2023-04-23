@@ -113,7 +113,7 @@ const businessSchema = new Schema({
   },
   confirm: {
     type: Boolean,
-    default: process.env.BUSINESS_CONFIRMATION_REQUIRED === 'true' //TODO: change to false
+    default: process.env.BUSINESS_CONFIRMATION_REQUIRED === 'false'
   }
 }, { 
   timestamps: true,

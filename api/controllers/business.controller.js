@@ -1,8 +1,8 @@
 const Business = require('../models/business.model');
-
 const { generateLoyaltyCode } = require('../utils/loyaltyCode');
 const createError = require('http-errors');
 const jwt = require('jsonwebtoken');
+const mailer = require('../config/mailer.config');
 
 module.exports.create = (req, res, next) => {
   const { lat, lng } = req.body;
@@ -16,9 +16,19 @@ module.exports.create = (req, res, next) => {
   req.body.loyaltyCode = generateLoyaltyCode(); //creates random code
 
   Business.create(req.body)
-    .then(business => res.status(201).json(business))
+    .then(business => {
+      mailer.sendBusinessConfirmationEmail(business);
+      res.status(201).json(business);
+    })
     .catch(next);
 };
+
+module.exports.confirm = (req, res, next) => {
+  req.business.confirm = true;
+  req.business.save()
+    .then(() => res.redirect(`${process.env.WEB_URL}`))
+    .catch(next);
+}
 
 module.exports.list = (req, res, next) => {
   Business.find()
@@ -54,19 +64,19 @@ module.exports.login = (req, res, next) => {
   Business.findOne({ username: req.body.username })
     .then((business) => {
       if (!business || !req.body.password) {
-        return next(createError(401, 'Por favor, revisa el nombre de usuario y la contraseña'));
+        return next(createError(401, { errors: { password: 'Por favor, revisa el nombre de usuario y la contraseña' }}));
       };
 
       business.checkPassword(req.body.password) //checkPassword is defined in the model
         .then((match) => {
           if (!match) {
-            return next(createError(401, 'Por favor, revisa el nombre de usuario y la contraseña'));
+            return next(createError(401, { errors: { password: 'Por favor, revisa el nombre de usuario y la contraseña' }}));
           } else if (!business.confirm) {
-            return next(createError(401, 'Revisa tu bandeja de entrada y confirma tu cuenta para acceder'));
+            return next(createError(401, { errors: { username: 'Revisa tu bandeja de entrada y confirma tu cuenta para acceder' }}));
           };
 
           const token = jwt.sign({ sub: business.id, exp: Date.now() / 1000 + 3_600 }, process.env.JWT_SECRET) //generates a token for authentication that expirates
-          res.json({ token });
+          res.json({ token, ...business.toJSON() });
         });
     })
     .catch(next);

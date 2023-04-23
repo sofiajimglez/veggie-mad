@@ -16,6 +16,7 @@ const secure = require('../middlewares/secure.mid')
 /* User routes */
 router.post('/users', storage.single('imageUrl'), users.create);
 router.get('/users/:id', secure.userAuth, usersMid.exists, usersMid.isOwned, users.detail);
+router.get('/users/:id/confirm', usersMid.exists, users.confirm);
 router.patch('/users/:id', secure.userAuth, usersMid.exists, usersMid.isOwned, users.update);
 router.delete('/users/:id', secure.userAuth, usersMid.exists, usersMid.isOwned, users.delete);
 
@@ -23,6 +24,7 @@ router.delete('/users/:id', secure.userAuth, usersMid.exists, usersMid.isOwned, 
 router.post('/businesses', storage.single('imageUrl'), storage.array('gallery'), businesses.create);
 router.get('/businesses', businesses.list);
 router.get('/businesses/:id', businessMid.exists, businesses.detail);
+router.get('/businesses/:id/confirm', businessMid.exists, businesses.confirm);
 router.patch('/businesses/:id', secure.businessAuth, businessMid.exists, businessMid.isOwned, businesses.update);
 router.delete('/businesses/:id', secure.businessAuth, businessMid.exists, businessMid.isOwned, businesses.delete);
 
