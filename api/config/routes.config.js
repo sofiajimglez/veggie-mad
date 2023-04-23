@@ -35,6 +35,7 @@ router.post('/businesses/:id/visit', secure.userAuth, businessMid.exists, visit.
 router.post('/businesses/:id/review', secure.userAuth, businessMid.exists, review.create);
 router.patch('/businesses/:id/review/:reviewId', secure.userAuth, businessMid.exists, review.update);
 router.delete('/businesses/:id/review/:reviewId', secure.userAuth, businessMid.exists, review.delete);
+router.post('/businesses/:id/review/:reviewId/comment', secure.businessAuth, businessMid.exists, businessMid.isOwned, review.comment);
 
 /* Login routes */
 router.post('/login/users', users.login);

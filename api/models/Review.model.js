@@ -35,5 +35,12 @@ const reviewSchema = new Schema({
   }
 });
 
+reviewSchema.virtual('comments', {
+  ref: 'Comment',
+  localField: '_id',
+  foreignField: 'review',
+  justOne: false
+});
+
 const Review = mongoose.model('Review', reviewSchema);
 module.exports = Review;

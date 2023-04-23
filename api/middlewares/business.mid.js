@@ -5,13 +5,13 @@ module.exports.exists = (req, res, next) => {
   Business.findById(req.params.id)
     .populate({ path: 'favs', populate: 'user' })
     .populate({ path: 'visits', populate: 'user' })
-    .populate({ path: 'reviews', populate: 'user' })
+    .populate({ path: 'reviews', populate: 'user comments' })
     .then(business => {
       if (business) {
         req.business = business;
         next();
       } else {
-        next(createError(404, 'Business not found'));
+        next(createError(404, 'Establecimiento no encontrado'));
       }
     })
     .catch(next)

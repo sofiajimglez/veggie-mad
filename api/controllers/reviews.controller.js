@@ -1,4 +1,5 @@
 const Review = require('../models/Review.model');
+const Comment = require('../models/comment.model');
 const createError = require('http-errors');
 
 module.exports.create = (req, res, next) => {
@@ -37,4 +38,16 @@ module.exports.delete = (req, res, next) => {
   Review.deleteOne({ _id: req.params.reviewId })
     .then(() => res.status(204).send())
     .catch(next)
+}
+
+module.exports.comment = (req, res, next) => {
+  const params = {
+    business: req.loggedBusiness.id,
+    review: req.params.reviewId,
+    text: req.body.text
+  }
+
+  Comment.create(params)
+    .then(comment => res.status(201).json(comment))
+    .catch(next);
 }
