@@ -11,6 +11,7 @@ require('./config/db.config');
 
 const app = express();
 
+app.use(require('./config/cors.config')); //domains that are allowed to make requests to the api
 app.use(express.json());
 app.use(logger('dev')); //morgan's middleware
 app.use(helmet()); //helmet's middleware 
