@@ -1,0 +1,654 @@
+{
+	"info": {
+		"_postman_id": "81f279a4-6625-41f8-88df-fa2d4027086e",
+		"name": "veggie-mad",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26661834"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"david\",\r\n    \"name\": \"david guapo\",\r\n    \"email\": \"david@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"address\": \"Madrid\",\r\n    \"privacy\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/users",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{USER_TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{BUSINESS_TOKEN}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{BASE_API_URL}}/users/64459d89e7a2734c2c91f050",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"users",
+								"64459d89e7a2734c2c91f050"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{USER_TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{BUSINESS_TOKEN}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"Granada\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/users/64459d89e7a2734c2c91f050",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"users",
+								"64459d89e7a2734c2c91f050"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{USER_TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{BUSINESS_TOKEN}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{BASE_API_URL}}/users/64459e2ee7a2734c2c91f05b",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"users",
+								"64459e2ee7a2734c2c91f05b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"sofi3\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/login/users",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"login",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "businesses",
+			"item": [
+				{
+					"name": "reviews",
+					"item": [
+						{
+							"name": "review",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{USER_TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{BUSINESS_TOKEN}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"rating\": 4,\r\n    \"text\": \"Estuvo guay la experiencia\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_API_URL}}/businesses/64459eebe7a2734c2c91f074/review",
+									"host": [
+										"{{BASE_API_URL}}"
+									],
+									"path": [
+										"businesses",
+										"64459eebe7a2734c2c91f074",
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "review",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{USER_TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{BUSINESS_TOKEN}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"rating\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_API_URL}}/businesses/64459eebe7a2734c2c91f074/review/6445a0ade7a2734c2c91f0dd",
+									"host": [
+										"{{BASE_API_URL}}"
+									],
+									"path": [
+										"businesses",
+										"64459eebe7a2734c2c91f074",
+										"review",
+										"6445a0ade7a2734c2c91f0dd"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "review",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{USER_TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{BUSINESS_TOKEN}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_API_URL}}/businesses/644176e7f1937882cc44b1ac/review/6443ac2dd2a708af644729c8",
+									"host": [
+										"{{BASE_API_URL}}"
+									],
+									"path": [
+										"businesses",
+										"644176e7f1937882cc44b1ac",
+										"review",
+										"6443ac2dd2a708af644729c8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "comment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{USER_TOKEN}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "{{BUSINESS_TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"Sentimos mucho que no te gustara la experiencia en nuestro local\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_API_URL}}/businesses/64459eebe7a2734c2c91f074/review/6445a0ade7a2734c2c91f0dd/comment",
+									"host": [
+										"{{BASE_API_URL}}"
+									],
+									"path": [
+										"businesses",
+										"64459eebe7a2734c2c91f074",
+										"review",
+										"6445a0ade7a2734c2c91f0dd",
+										"comment"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "businesses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"negocio2\",\r\n    \"name\": \"Negocio 2\",\r\n    \"email\": \"negocio2@prueba.es\",\r\n    \"address\": \"Madrid\",\r\n    \"password\": \"12345678\",\r\n    \"category\": \"Restaurante\",\r\n    \"privacy\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/businesses",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"businesses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "businesses",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{USER_TOKEN}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{BUSINESS_TOKEN}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{BASE_API_URL}}/businesses",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"businesses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "business",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{USER_TOKEN}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{BUSINESS_TOKEN}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{BASE_API_URL}}/businesses/64459eebe7a2734c2c91f074",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"businesses",
+								"64459eebe7a2734c2c91f074"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "business",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{USER_TOKEN}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{BUSINESS_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"negocio1@prueba.net\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/businesses/64459eebe7a2734c2c91f074",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"businesses",
+								"64459eebe7a2734c2c91f074"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "business",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{USER_TOKEN}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{BUSINESS_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"negocio2@prueba.net\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/businesses/644266f2d89d311121447a58",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"businesses",
+								"644266f2d89d311121447a58"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"negocio1\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/login/businesses",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"login",
+								"businesses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fav",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{USER_TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{BUSINESS_TOKEN}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{BASE_API_URL}}/businesses/64459eebe7a2734c2c91f074/fav",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"businesses",
+								"64459eebe7a2734c2c91f074",
+								"fav"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "visit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{USER_TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{BUSINESS_TOKEN}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"loyaltyCode\": \"VM27948\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/businesses/64459eebe7a2734c2c91f074/visit",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"businesses",
+								"64459eebe7a2734c2c91f074",
+								"visit"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_API_URL",
+			"value": "http://localhost:3001/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "USER_TOKEN",
+			"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDQwNTM5ODIyYmVmMTVlNjliOGFlYjkiLCJleHAiOjE2ODIyODcyMzMuNDI0LCJpYXQiOjE2ODIyODM2MzN9.DsmxVO62vkgEk306ZGa4iYxogRZb4u77T-kpV2GN7e8"
+		},
+		{
+			"key": "BUSINESS_TOKEN",
+			"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDQyNjk5MDk3OGRhMGZmNTM1OGFhNjciLCJleHAiOjE2ODIyODY2MzguMzgxLCJpYXQiOjE2ODIyODMwMzh9.Vj9kIV1Vh0P3uwO3btFXy14gfnCxKHUTSMVwTSHHsD0",
+			"type": "string"
+		}
+	]
+}
