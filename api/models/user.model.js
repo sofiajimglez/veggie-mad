@@ -6,11 +6,11 @@ const validations = require('../utils/validations');
 const userSchema = new Schema({
   username: {
     type: String,
-    required:[true, 'Por favor, establece un alias'],
+    required: [true, 'El nombre de usuario es obligatorio'],
     minlength: [3, 'Mínimo 3 caracteres'],
     maxlength: [10, 'Máximo 10 caracteres'],
     lowercase: true,
-    match: [/^[a-z0-9]+$/, 'Por favor, introduce solo letras minúsuculas o números sin espacios'],
+    match: [/^[a-z0-9]+$/, 'Solo letras minúsuculas o números, sin espacios'],
     unique: true, 
   },
   name: {
@@ -56,7 +56,7 @@ const userSchema = new Schema({
     required: true,
     validate: {
       validator: validations.isAccepted,
-      message: 'Tienes que aceptar nuestra Política de Privacidad para crear tu cuenta'
+      message: 'Tienes que aceptar la política de privacidad para crear tu cuenta'
     }
   },
   points: {

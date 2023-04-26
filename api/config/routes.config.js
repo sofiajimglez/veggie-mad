@@ -14,10 +14,10 @@ const businessMid = require('../middlewares/business.mid');
 const secure = require('../middlewares/secure.mid')
 
 /* User routes */
-router.post('/users', storage.single('imageUrl'), users.create);
+router.post('/users', users.create);
 router.get('/users/:id', secure.userAuth, usersMid.exists, usersMid.isOwned, users.detail);
 router.get('/users/:id/confirm', usersMid.exists, users.confirm);
-router.patch('/users/:id', secure.userAuth, usersMid.exists, usersMid.isOwned, users.update);
+router.patch('/users/:id', storage.single('imageUrl'), secure.userAuth, usersMid.exists, usersMid.isOwned, users.update);
 router.delete('/users/:id', secure.userAuth, usersMid.exists, usersMid.isOwned, users.delete);
 
 /* Business routes */
