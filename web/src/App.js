@@ -1,10 +1,17 @@
-import UsersRegisterForm from "./components/users/UsersRegisterForm";
+import { Route, Routes } from "react-router-dom";
+import RegisterPage from "./pages/RegisterPage";
+import HomePage from "./pages/HomePage";
+import Navbar from "./components/Navbar/Navbar";
 
 
 function App() {
   return (
     <>
-      <UsersRegisterForm />
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/register' element={<RegisterPage />} />
+      </Routes>
 
     </>
   );

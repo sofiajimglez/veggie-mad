@@ -5,6 +5,11 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      primary: ['Permanent Marker', 'cursive'],
+      secondary: ['Itim', 'cursive'],
+      tertiary: ['Roboto', 'sans-serif'],
+    }
   },
   plugins: [],
 }
