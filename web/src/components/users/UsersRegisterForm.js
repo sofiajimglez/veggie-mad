@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import usersService from '../../services/users';
 
 export default function UsersRegisterForm() {
   const { register, handleSubmit, setError, formState: { errors } } = useForm({ mode: 'onBlur' });
   const [serverError, setServerError] = useState();
+  const navigate = useNavigate();
 
-  const onUserSubmit = (user) => {
-    setServerError();
-    usersService.create(user)
-      .then(user => console.info(user))
-      .catch(error => {
-        const errors = error.response?.data?.errors;
+  const onUserSubmit = async (user) => {
+    try {
+      setServerError();
+      console.debug('Registering user...');
+      user = await usersService.create(user);
+      navigate('/login', { state: { user }});
+    } catch (error) {
+      const errors = error.response?.data?.errors;
         if (errors) {
           Object.keys(errors)
             .forEach((inputName) => setError(inputName, { message: errors[inputName] }));
         } else {
           setServerError(error.message);
         };
-      });
-    console.log(user);
-  }
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onUserSubmit)}>
@@ -79,7 +82,7 @@ export default function UsersRegisterForm() {
       
       {/* Location */}
       <div className='mb-4'>
-        <lab     el htmlFor='address' className='block mb-2 text-sm font-medium text-gray-900'>Localización</lab>
+        <label htmlFor='address' className='block mb-2 text-sm font-medium text-gray-900'>Localización</label>
         <input
           type='text'
           id='address'
@@ -101,7 +104,13 @@ export default function UsersRegisterForm() {
           id='password'
           className={`rounded-lg block flex-1 min-w-0 w-full text-sm p-2.5 border border-gray-300 text-gray-900 ${errors.password ? 'bg-red-50 placeholder-red-700' : 'bg-gray-50'}`}
           placeholder='••••••••'
-          {...register('password', { required: 'Por favor, establece una contraseña' })} />
+          {...register('password', { 
+            required: 'Por favor, establece una contraseña',
+            minLength: {
+              value: 8,
+              message: 'Mínimo 8 caracteres'
+            }
+          })} />
         {errors.password && <p className='mt-2 text-sm text-red-600'>{errors.password?.message}</p>}
       </div>
       

@@ -6,9 +6,9 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      primary: ['Permanent Marker', 'cursive'],
-      secondary: ['Itim', 'cursive'],
-      tertiary: ['Roboto', 'sans-serif'],
+      primary: ['Plaster', 'cursive'],
+      secondary: ['Dongle', 'sans-serif'],
+      tertiary: ['Dongle', 'sans-serif'],
     }
   },
   plugins: [],
