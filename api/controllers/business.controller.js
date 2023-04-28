@@ -5,12 +5,11 @@ const jwt = require('jsonwebtoken');
 const mailer = require('../config/mailer.config');
 
 module.exports.create = (req, res, next) => {
-  const { lat, lng } = req.body;
-  if (lat && lng) { //transforms data from form to the format needed by mongoose
-    req.body.location = {
-      type: 'Point',
-      coordinates: [lng, lat]
-    };
+  const { location } = req.body;
+  req.body.address = location?.address;
+  req.body.location = {
+    type: 'Point',
+    coordinates: location?.coordinates?.reverse()
   };
 
   req.body.loyaltyCode = generateLoyaltyCode(); //creates random code

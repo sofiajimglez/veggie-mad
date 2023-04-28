@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import usersService from '../../services/users';
+import GooglePlacesAutocomplete, { geocodeByPlaceId, getLatLng } from 'react-google-places-autocomplete';
 
 export default function UsersRegisterForm() {
-  const { register, handleSubmit, setError, formState: { errors } } = useForm({ mode: 'onBlur' });
+  const { register, handleSubmit, setError, control, formState: { errors } } = useForm({ mode: 'onBlur' });
   const [serverError, setServerError] = useState();
   const navigate = useNavigate();
 
@@ -12,23 +13,24 @@ export default function UsersRegisterForm() {
     try {
       setServerError();
       console.debug('Registering user...');
+      user.location = user.location.location;
       user = await usersService.create(user);
-      navigate('/login', { state: { user }});
+      navigate('/login', { state: { user } });
     } catch (error) {
       const errors = error.response?.data?.errors;
-        if (errors) {
-          Object.keys(errors)
-            .forEach((inputName) => setError(inputName, { message: errors[inputName] }));
-        } else {
-          setServerError(error.message);
-        };
+      if (errors) {
+        Object.keys(errors)
+          .forEach((inputName) => setError(inputName, { message: errors[inputName] }));
+      } else {
+        setServerError(error.message);
+      };
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onUserSubmit)}>
       {/* Server error feedback */}
-      <div className='mb-6'> 
+      <div className='mb-6'>
         {serverError && <p className="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400">{serverError}</p>}
       </div>
 
@@ -49,7 +51,7 @@ export default function UsersRegisterForm() {
           })} />
         {errors.username && <p className='mt-2 text-sm text-red-600'>{errors.username?.message}</p>}
       </div>
-      
+
       {/* Name */}
       <div className='mb-4'>
         <label htmlFor='name' className='block mb-2 text-sm font-medium text-gray-900'>Nombre y apellidos</label>
@@ -79,23 +81,48 @@ export default function UsersRegisterForm() {
           })} />
         {errors.email && <p className='mt-2 text-sm text-red-600'>{errors.email?.message}</p>}
       </div>
-      
+
       {/* Location */}
       <div className='mb-4'>
-        <label htmlFor='address' className='block mb-2 text-sm font-medium text-gray-900'>Localización</label>
-        <input
+        <label htmlFor='location' className='block mb-2 text-sm font-medium text-gray-900'>Localización</label>
+        <Controller
+          control={control}
+          name='location'
+          rules={{
+            required: 'La dirección es obligatoria'
+          }}
+          render={({ field: { onChange, value, ref } }) => (
+            <GooglePlacesAutocomplete
+              ref={ref}
+              selectProps={{
+                value: value?.result,
+                onChange: async (result) => {
+                  console.log(result);
+                  const places = await geocodeByPlaceId(result.value.place_id);
+                  const { lat, lng } = await getLatLng(places[0]);
+                  onChange({ result, location: { address: result.label, coordinates: [lat, lng] }});
+                },
+              }}
+            />
+          )}
+        />
+
+
+
+
+        {/* <input
           type='text'
           id='address'
           className={`g-places-finder rounded-lg block flex-1 min-w-0 w-full text-sm p-2.5 border border-gray-300 text-gray-900 ${errors.address ? 'bg-red-50 placeholder-red-700' : 'bg-gray-50'}`}
           placeholder='📍 Calle de Manuela Malasaña, s/n, Madrid'
-          {...register('address', { required: 'La dirección es obligatoria' })} />
+          {...register('address', { required: 'La dirección es obligatoria' })} /> */}
         <p id='location-helper' className='mt-2 text-sm text-gray-500 italic'>¡Queremos mostrarte los lugares más cercanos a ti! Nunca compartiremos esta información con terceros.</p>
         {errors.address && <p className='mt-2 text-sm text-red-600'>{errors.address?.message}</p>}
 
-        <input type='hidden' name='lat' {...register('lat')}/>
-        <input type='hidden' name='lng' {...register('lng')}/>
+        <input type='hidden' name='lat' {...register('lat')} />
+        <input type='hidden' name='lng' {...register('lng')} />
       </div>
-    
+
       {/* Password */}
       <div className='mb-4'>
         <label htmlFor='password' className='block mb-2 text-sm font-medium text-gray-900'>Contraseña</label>
@@ -104,7 +131,7 @@ export default function UsersRegisterForm() {
           id='password'
           className={`rounded-lg block flex-1 min-w-0 w-full text-sm p-2.5 border border-gray-300 text-gray-900 ${errors.password ? 'bg-red-50 placeholder-red-700' : 'bg-gray-50'}`}
           placeholder='••••••••'
-          {...register('password', { 
+          {...register('password', {
             required: 'Por favor, establece una contraseña',
             minLength: {
               value: 8,
@@ -113,7 +140,7 @@ export default function UsersRegisterForm() {
           })} />
         {errors.password && <p className='mt-2 text-sm text-red-600'>{errors.password?.message}</p>}
       </div>
-      
+
       {/* Privacy */}
       <div className='mb-4'>
         <div className='flex items-center'>
@@ -128,7 +155,7 @@ export default function UsersRegisterForm() {
       </div>
 
       <button type='submit' className='text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center'>Crear cuenta</button>
-    
+
     </form>
   )
 }

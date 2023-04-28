@@ -30,16 +30,25 @@ const userSchema = new Schema({
     minlength: [8, 'Mínimo 8 caracteres']
   }, 
   address: {
-    type: String,
-    required: [true, 'La dirección es obligatoria']
+    type: String
   },
   location: {
-    type: {
-      type: String,
-      enum: ['Point']
-    },
-    coordinates: {
-      type: [Number]
+    type: new Schema({
+      type: {
+        type: String,
+        enum: ['Point'],
+        required: true
+      },
+      coordinates: {
+        type: [Number],
+        required: true
+      }
+    }),
+    validate: {
+      validator: function (location) {
+        return this.address != undefined && location.coordinates?.length > 0;
+      },
+      message: 'La localización es obligatoria'
     }
   },
   imageUrl: {
@@ -78,6 +87,11 @@ const userSchema = new Schema({
       delete ret.password;
       delete ret.confirm;
       delete ret.privacy;
+      ret.location = {
+        address: ret.address,
+        coordinates: ret.location.coordinates
+      };
+      delete ret.address;
       return ret;
     }
   }
