@@ -93,6 +93,11 @@ export default function UsersRegisterForm() {
           }}
           render={({ field: { onChange, value, ref } }) => (
             <GooglePlacesAutocomplete
+              autocompletionRequest={{
+                componentRestrictions: {
+                  country: ['es'],
+                }
+              }}
               ref={ref}
               selectProps={{
                 value: value?.result,
@@ -100,7 +105,7 @@ export default function UsersRegisterForm() {
                   console.log(result);
                   const places = await geocodeByPlaceId(result.value.place_id);
                   const { lat, lng } = await getLatLng(places[0]);
-                  onChange({ result, location: { address: result.label, coordinates: [lat, lng] }});
+                  onChange({ result, location: { address: result.label, coordinates: [lat, lng] } });
                 },
               }}
             />
