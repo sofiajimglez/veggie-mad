@@ -43,7 +43,7 @@ export default function Navbar() {
           {/* Buttons */}
           {(user?.username) ? (
             <>
-              <p>{user.username}</p>
+              <Link to='/profile'>{user.username}</Link>
               <button onClick={() => logout()}>Logout</button>
             </>
           ) : (
