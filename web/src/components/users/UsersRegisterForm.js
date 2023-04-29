@@ -29,6 +29,7 @@ export default function UsersRegisterForm() {
 
   return (
     <form onSubmit={handleSubmit(onUserSubmit)}>
+      
       {/* Server error feedback */}
       <div className='mb-6'>
         {serverError && <p className="alert alert-danger d-none d-lg-block">{serverError}</p>}
