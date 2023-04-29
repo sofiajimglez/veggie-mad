@@ -3,6 +3,10 @@
 font-family: 'Patrick Hand', cursive;
 font-family: 'Plaster', cursive; */
 
+
+
+
+/* NAVBAR */
 .nav-img {
   width: 60px;
   margin-right: 10px;
@@ -13,8 +17,15 @@ font-family: 'Plaster', cursive; */
   font-family: 'Plaster', cursive;
 }
 
-
+/* FOOTER */
 footer {
-  background-color: #C45A8D;
+  background-color: #783153;
   color: whitesmoke;
+}
+
+/* LAYOUT */
+
+.page-layout .container {
+  padding-bottom: 60px;
+  padding-top: 20px;
 }
