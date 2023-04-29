@@ -100,6 +100,10 @@ export default function UsersRegisterForm() {
               }}
               ref={ref}
               selectProps={{
+                styles: {
+                  valueContainer: (provided) => ({ ...provided, fontSize: '1rem', borderRadius: '0.37rem', border: '0px solid black'})
+                },
+                placeholder: '📍 Calle de Manuela Malasaña, s/n, Madrid',
                 value: value?.result,
                 onChange: async (result) => {
                   console.log(result);
@@ -111,18 +115,8 @@ export default function UsersRegisterForm() {
             />
           )}
         />
-
-
-
-
-        {/* <input
-          type='text'
-          id='address'
-          className={`g-places-finder rounded-lg block flex-1 min-w-0 w-full text-sm p-2.5 border border-gray-300 text-gray-900 ${errors.address ? 'bg-red-50 placeholder-red-700' : 'bg-gray-50'}`}
-          placeholder='📍 Calle de Manuela Malasaña, s/n, Madrid'
-          {...register('address', { required: 'La dirección es obligatoria' })} /> */}
         <p id='location-helper' className='mt-2 text-sm text-gray-500 italic'>¡Queremos mostrarte los lugares más cercanos a ti! Nunca compartiremos esta información con terceros.</p>
-        {errors.address && <p className='mt-2 text-sm text-red-600'>{errors.address?.message}</p>}
+        {errors.location && <p className='mt-2 text-sm text-red-600'>{errors.location?.message}</p>}
 
         <input type='hidden' name='lat' {...register('lat')} />
         <input type='hidden' name='lng' {...register('lng')} />
