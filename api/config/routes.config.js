@@ -21,11 +21,11 @@ router.patch('/users/:id', storage.single('imageUrl'), secure.userAuth, usersMid
 router.delete('/users/:id', secure.userAuth, usersMid.exists, usersMid.isOwned, users.delete);
 
 /* Business routes */
-router.post('/businesses', storage.single('imageUrl'), storage.array('gallery'), businesses.create);
+router.post('/businesses', businesses.create);
 router.get('/businesses', businesses.list);
 router.get('/businesses/:id', businessMid.exists, businesses.detail);
 router.get('/businesses/:id/confirm', businessMid.exists, businesses.confirm);
-router.patch('/businesses/:id', secure.businessAuth, businessMid.exists, businessMid.isOwned, businesses.update);
+router.patch('/businesses/:id', secure.businessAuth, businessMid.exists, businessMid.isOwned, storage.single('imageUrl'), storage.array('gallery'), businesses.update);
 router.delete('/businesses/:id', secure.businessAuth, businessMid.exists, businessMid.isOwned, businesses.delete);
 
 router.post('/businesses/:id/fav', secure.userAuth, businessMid.exists, fav.toggle);

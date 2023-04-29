@@ -47,7 +47,7 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link to='/register' className='btn btn-primary'>Registrarse</Link>
+                <Link to='/users/register' className='btn btn-primary'>Registrarse</Link>
                 <Link to='/login' className='btn btn-primary'>Entrar</Link>
               </>
             )}

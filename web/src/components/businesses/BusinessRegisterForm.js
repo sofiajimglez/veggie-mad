@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
-import usersService from '../../services/users';
+import businessesService from '../../services/businesses';
+import Select from 'react-select';
 import GooglePlacesAutocomplete, { geocodeByPlaceId, getLatLng } from 'react-google-places-autocomplete';
 
-export default function UsersRegisterForm() {
+export default function BusinessRegisterForm() {
   const { register, handleSubmit, setError, control, formState: { errors } } = useForm({ mode: 'onBlur', defaultValues: { privacy: false } });
   const [serverError, setServerError] = useState();
   const navigate = useNavigate();
 
-  const onUserSubmit = async (user) => {
+  const categoryOptions = ['Restaurante', 'Alojamiento', 'Tienda', 'Asociación benéfica', 'Servicio', 'Otro'].map(category => ({ value: category, label: category }));
+
+  const onBusinessSubmit = async (business) => {
     try {
       setServerError();
-      console.debug('Registering user...');
-      user.location = user.location.location;
-      user = await usersService.create(user);
-      navigate('/login', { state: { user } });
+      console.debug('Registering business...');
+      business.location = business.location.location;
+      business = await businessesService.create(business);
+      navigate('/login', { state: { business } });
     } catch (error) {
       const errors = error.response?.data?.errors;
       if (errors) {
@@ -28,7 +31,7 @@ export default function UsersRegisterForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onUserSubmit)}>
+    <form onSubmit={handleSubmit(onBusinessSubmit)}>
       
       {/* Server error feedback */}
       <div className='mb-6'>
@@ -44,7 +47,7 @@ export default function UsersRegisterForm() {
             id='username'
             type='text'
             className={`form-control ${errors.username ? 'is-invalid' : ''}`}
-            placeholder='manuelamalasaña'
+            placeholder='tiendavegana'
             {...register('username', {
               required: 'El nombre de usuario es obligatorio',
               pattern: {
@@ -58,14 +61,14 @@ export default function UsersRegisterForm() {
 
       {/* Name */}
       <div className='mb-3'>
-        {/* <label htmlFor='name' className='form-label'>Nombre y apellidos</label> */}
+        {/* <label htmlFor='name' className='form-label'>Nombre de la entidad</label> */}
         <div className='input-group'>
           <span className="input-group-text"><i className='fa-solid fa-face-smile'></i></span>
           <input
             type='text'
             id='name'
             className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-            placeholder='Manuela Malasaña'
+            placeholder='Tienda Vegana'
             {...register('name', { required: 'El nombre es obligatorio' })} />
           {errors.name && <p className='invalid-feedback'>{errors.name?.message}</p>}
         </div>
@@ -80,7 +83,7 @@ export default function UsersRegisterForm() {
             type='email'
             id='email'
             className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-            placeholder='manuela@example.com'
+            placeholder='tiendavegana@example.com'
             {...register('email', {
               required: 'El email es obligatorio',
               pattern: {
@@ -115,7 +118,7 @@ export default function UsersRegisterForm() {
                     valueContainer: (provided) => ({ ...provided, fontSize: '1rem', fontWeight: '400', border: 'none' }),
                     container: (provided) => ({ ...provided, borderRadius: '0.37rem', border: 'none', display: 'block', width: '100%' })
                   },
-                  placeholder: 'Calle de Manuela Malasaña, s/n, Madrid',
+                  placeholder: 'Calle de Concepción Arenal, s/n, Madrid',
                   value: value?.result,
                   onChange: async (result) => {
                     console.log(result);
@@ -130,6 +133,38 @@ export default function UsersRegisterForm() {
         {errors.location && <p className='invalid-feedback'>{errors.location?.message}</p>}
         </div>
         {/* <p id='location-helper' className='form-text fst-italic'>¡Queremos mostrarte los lugares más cercanos a ti! Nunca compartiremos esta información con terceros.</p> */}
+      </div>
+
+      {/* Category */}
+      <div className='mb-3'>
+        {/* <label htmlFor='email' className='form-label'>Área profesional</label> */}
+        <div className='input-group'>
+          <span className="input-group-text"><i className='fa-solid fa-briefcase'></i></span>
+          <Controller
+            control={control}
+            name='category'
+            rules={{
+              required: 'Por favor, selecciona una categoría'
+            }}
+            render={({ field: { onChange, value, ref } }) => (
+              <Select
+                inputRef={ref}
+                className={`form-control p-0 ${errors.category ? 'is-invalid' : ''}`}
+                placeholder='Selecciona una categoría...'
+                options={categoryOptions}
+                styles={{
+                  control: (baseStyles) => ({
+                    ...baseStyles,
+                    border: 'none',
+                  }),
+                }}
+                value={categoryOptions.find(option => option.value === value)}
+                onChange={(option) => onChange(option.value)}
+              />
+            )}
+          />
+        {errors.category && <p className='invalid-feedback'>{errors.category?.message}</p>}
+        </div>
       </div>
 
       {/* Password */}

@@ -40,6 +40,7 @@ export default function UsersLoginForm({ mode }) {
       {/* Confirm account feedback */}
       <div className='mb-6'> 
         {location?.state?.user?.confirm === false && <p className='alert alert-info'>Revisa tu bandeja de entrada y confirma tu cuenta para acceder</p>}
+        {location?.state?.business?.confirm === false && <p className='alert alert-info'>Revisa tu bandeja de entrada y confirma tu cuenta para acceder</p>}
       </div>
 
       {/* Username */}

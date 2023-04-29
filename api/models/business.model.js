@@ -138,8 +138,6 @@ const businessSchema = new Schema({
       ret.id = ret._id;
       delete ret._id;
       delete ret.password;
-      delete ret.confirm;
-      delete ret.privacy;
       ret.location = {
         address: ret.address || '',
         coordinates: ret.location?.coordinates || []
