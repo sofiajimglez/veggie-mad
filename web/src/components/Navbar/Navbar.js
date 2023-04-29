@@ -10,7 +10,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top">
         <div className="container-fluid">
 
           {/* Burguer menu */}

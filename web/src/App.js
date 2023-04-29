@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import AuthUserStore from "./contexts/AuthUserStore";
 import PrivateRoute from "./guards/PrivateRoute";
 import ProfilePage from "./pages/ProfilePage";
+import Footer from "./components/footer/Footer";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path='/profile' element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
           <Route path='/negocio' element={<PrivateRoute role='business'><ProfilePage /></PrivateRoute>} />
         </Routes>
+        <Footer />
       </AuthUserStore>
     </>
   );

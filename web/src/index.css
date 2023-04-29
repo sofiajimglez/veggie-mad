@@ -12,3 +12,9 @@ font-family: 'Plaster', cursive; */
   margin-top: 5px;
   font-family: 'Plaster', cursive;
 }
+
+
+footer {
+  background-color: #C45A8D;
+  color: whitesmoke;
+}
