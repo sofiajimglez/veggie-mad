@@ -18,6 +18,7 @@ function App() {
           <Route path='/register' element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path='/profile' element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
+          <Route path='/negocio' element={<PrivateRoute role='business'><ProfilePage /></PrivateRoute>} />
         </Routes>
       </AuthUserStore>
     </>

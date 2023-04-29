@@ -91,17 +91,16 @@ export default function UsersRegisterForm() {
           rules={{
             required: 'La dirección es obligatoria'
           }}
-          render={({ field: { onChange, value, ref } }) => (
+          render={({ field: { onChange, value } }) => (
             <GooglePlacesAutocomplete
               autocompletionRequest={{
                 componentRestrictions: {
                   country: ['es'],
                 }
               }}
-              ref={ref}
               selectProps={{
                 styles: {
-                  valueContainer: (provided) => ({ ...provided, fontSize: '1rem', borderRadius: '0.37rem', border: '0px solid black'})
+                  valueContainer: (provided) => ({ ...provided, fontSize: '1rem', borderRadius: '0.37rem', border: 'none'})
                 },
                 placeholder: '📍 Calle de Manuela Malasaña, s/n, Madrid',
                 value: value?.result,

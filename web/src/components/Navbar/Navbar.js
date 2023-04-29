@@ -74,6 +74,7 @@ export default function Navbar() {
             <li>
               <NavLink to='/sobre-veggie-mad' className={renderNavLinkClassName}>Sobre el proyecto</NavLink>
             </li>
+            {user?.role === 'business' && <li><NavLink to='/negocio' className={renderNavLinkClassName}>Negocio</NavLink></li>}
           </ul>
         </div>
 

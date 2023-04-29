@@ -4,6 +4,11 @@ const bcrypt = require('bcrypt');
 const validations = require('../utils/validations');
 
 const userSchema = new Schema({
+  role: {
+    type: String,
+    enum: ['user'],
+    default: 'user'
+  },
   username: {
     type: String,
     required: [true, 'El nombre de usuario es obligatorio'],
@@ -88,8 +93,8 @@ const userSchema = new Schema({
       delete ret.confirm;
       delete ret.privacy;
       ret.location = {
-        address: ret.address,
-        coordinates: ret.location.coordinates
+        address: ret.address || '',
+        coordinates: ret.location?.coordinates || []
       };
       delete ret.address;
       return ret;

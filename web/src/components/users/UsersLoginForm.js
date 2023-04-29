@@ -2,9 +2,10 @@ import React, { useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import usersService from '../../services/users';
+import businessesService from '../../services/businesses';
 import { AuthContext } from '../../contexts/AuthUserStore';
 
-export default function UsersLoginForm() {
+export default function UsersLoginForm({ mode }) {
   const location = useLocation();
   const { register, handleSubmit, setError, formState: { errors } } = useForm({ mode: 'onBlur', defaultValues: { username: location?.state?.user?.username } });
   const [serverError, setServerError] = useState();
@@ -14,7 +15,7 @@ export default function UsersLoginForm() {
   const onLoginSubmit = async (user) => {
     try {
       setServerError();
-      user = await usersService.login(user);
+      user = await (mode === 'user' ? usersService.login(user) : businessesService.login(user));
       onUserChange(user);
       navigate('/');
     } catch (error) {
@@ -28,6 +29,8 @@ export default function UsersLoginForm() {
     }
   };
 
+  console.log(location.state?.user);
+
   return (
     <form onSubmit={handleSubmit(onLoginSubmit)}>
       {/* Server error feedback */}
@@ -37,7 +40,7 @@ export default function UsersLoginForm() {
 
       {/* Confirm account feedback */}
       <div className='mb-6'> 
-        {location?.state?.user?.confirm === false && <p className="bg-blue-50 border border-blue-500 text-blue-900 placeholder-blue-700 text-sm rounded-lg block w-full p-2.5">Revisa tu bandeja de entrada y confirma tu cuenta para acceder</p>}
+        {location?.state?.user?.confirm === false && <p>Revisa tu bandeja de entrada y confirma tu cuenta para acceder</p>}
       </div>
 
       {/* Username */}
@@ -68,4 +71,8 @@ export default function UsersLoginForm() {
 
     </form>
   )
+}
+
+UsersLoginForm.defaultProps = {
+  mode: 'user'
 }

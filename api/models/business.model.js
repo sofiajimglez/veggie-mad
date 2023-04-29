@@ -4,6 +4,11 @@ const bcrypt = require('bcrypt');
 const validations = require('../utils/validations');
 
 const businessSchema = new Schema({
+  role: {
+    type: String,
+    enum: ['business'],
+    default: 'business'
+  },
   username: {
     type: String,
     required:[true, 'Por favor, establece un alias para tu entidad'],
@@ -136,8 +141,8 @@ const businessSchema = new Schema({
       delete ret.confirm;
       delete ret.privacy;
       ret.location = {
-        address: ret.address,
-        coordinates: ret.location.coordinates
+        address: ret.address || '',
+        coordinates: ret.location?.coordinates || []
       };
       delete ret.address;
       return ret;
