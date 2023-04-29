@@ -1,8 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Patrick+Hand&family=Plaster&display=swap');
 /* font-family: 'Dongle', sans-serif;
 font-family: 'Patrick Hand', cursive;
 font-family: 'Plaster', cursive; */
+
+.nav-img {
+  width: 60px;
+  margin-right: 10px;
+}
+
+.navbar-brand {
+  margin-top: 5px;
+  font-family: 'Plaster', cursive;
+}
