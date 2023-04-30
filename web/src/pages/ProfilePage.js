@@ -1,11 +1,14 @@
-import React from 'react';
-import UserProfile from '../components/users/UserProfile';
+import React, { useContext } from 'react';
+import UserProfile from '../components/users/user-profile/UserProfile';
+import PageLayout from '../components/layout/PageLayout';
+import { AuthContext } from '../contexts/AuthUserStore';
 
 export default function ProfilePage() {
+  const { user } = useContext(AuthContext);
+
   return (
-    <div>
-      <h1>Profile Page</h1>
-      <UserProfile />
-    </div>
+    <PageLayout title="Bienvenido a tu espacio personal">
+      {user?.role === 'user' && <UserProfile />}
+    </PageLayout>
   )
 }
