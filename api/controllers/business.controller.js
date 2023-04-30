@@ -4,6 +4,8 @@ const createError = require('http-errors');
 const jwt = require('jsonwebtoken');
 const mailer = require('../config/mailer.config');
 
+const maxSessionTime = parseInt(process.env.MAX_SESSION_TIME || 3_600);
+
 module.exports.create = (req, res, next) => {
   const { location } = req.body;
   req.body.address = location?.address;
@@ -74,7 +76,7 @@ module.exports.login = (req, res, next) => {
             return next(createError(401, { errors: { username: 'Revisa tu bandeja de entrada y confirma tu cuenta para acceder' }}));
           };
 
-          const token = jwt.sign({ sub: business.id, exp: Date.now() / 1000 + 3_600 }, process.env.JWT_SECRET) //generates a token for authentication that expirates
+          const token = jwt.sign({ sub: business.id, exp: Date.now() / 1000 + maxSessionTime }, process.env.JWT_SECRET) //generates a token for authentication that expirates
           res.json({ token, ...business.toJSON() });
         });
     })

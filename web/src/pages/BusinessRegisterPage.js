@@ -17,7 +17,7 @@ export default function BusinessRegisterPage() {
             <li>Ventaja 3</li>
           </ul>
           <hr />
-          <p className='m-0 text-muted'>¿Eres un particular? <Link to="/businesses/register">Regístrate aquí</Link> y comienza a disfrutrar de la vida <i>veggie</i> madrileña</p>
+          <p className='m-0 text-muted'>¿Eres un particular? <Link to="/users/register">Regístrate aquí</Link> y comienza a disfrutrar de la vida <i>veggie</i> madrileña</p>
         </div>
 
         <div className='col-sm-12 col-md-7 px-5'>

@@ -1,26 +1,53 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import usersService from '../services/users';
+import businessesService from '../services/businesses';
+
 
 const AuthContext = createContext();
 
+const restoreUserFromLocalStorage = () => {
+  const user = localStorage.getItem('current-user');
+  if (user) {
+    return JSON.parse(user);
+  } else {
+    return undefined;
+  };
+};
+
 function AuthUserStore({ children }) {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(restoreUserFromLocalStorage);
   const navigate = useNavigate();
 
-  const handleUserChange = (user) => {
-    console.info('Updated user context', user);
-    if (!user) {
-      localStorage.removeItem('user-access-token');
-    } else {
-      localStorage.setItem('user-access-token', user.token);
-    }
-    setUser(user);
-  };
+  useEffect(() => {
+    async function fetchUser() {
+      if (user && user.role === 'user') {
+        const profile = await usersService.get(user.id);
+        handleUserChange({ ...profile, token: user.token });
+      } else if (user && user.role === 'business') {
+        const profile = await businessesService.get(user.id);
+        handleUserChange({ ...profile, token: user.token });
+      }
+    };
+    fetchUser();
+  }, [])
 
-  const logout = () => {
+  const handleUserChange = useCallback((user) => {
+      console.info('Updated user context', user);
+      if (!user) {
+        localStorage.removeItem('current-user');
+        localStorage.removeItem('user-access-token');
+      } else {
+        localStorage.setItem('current-user', JSON.stringify(user));
+        localStorage.setItem('user-access-token', user.token);
+      }
+      setUser(user);
+  }, []);
+
+  const logout = useCallback(() => {
     handleUserChange();
     navigate('/');
-  }
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, logout, onUserChange: handleUserChange }}>
@@ -29,4 +56,4 @@ function AuthUserStore({ children }) {
   )
 }
 
-export { AuthUserStore as default, AuthContext};
+export { AuthUserStore as default, AuthContext };
