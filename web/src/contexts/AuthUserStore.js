@@ -19,19 +19,6 @@ function AuthUserStore({ children }) {
   const [user, setUser] = useState(restoreUserFromLocalStorage);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchUser() {
-      if (user && user.role === 'user') {
-        const profile = await usersService.get(user.id);
-        handleUserChange({ ...profile, token: user.token });
-      } else if (user && user.role === 'business') {
-        const profile = await businessesService.get(user.id);
-        handleUserChange({ ...profile, token: user.token });
-      }
-    };
-    fetchUser();
-  }, [])
-
   const handleUserChange = useCallback((user) => {
       console.info('Updated user context', user);
       if (!user) {
@@ -43,11 +30,25 @@ function AuthUserStore({ children }) {
       }
       setUser(user);
   }, []);
+  
+  useEffect(() => {
+    async function fetchUser() {
+      if (user && user.role === 'user') {
+        const profile = await usersService.get(user.id);
+        handleUserChange({ ...profile, token: user.token });
+      } else if (user && user.role === 'business') {
+        const profile = await businessesService.get(user.id);
+        handleUserChange({ ...profile, token: user.token });
+      }
+    };
+    fetchUser();
+  }, [handleUserChange])
+
 
   const logout = useCallback(() => {
     handleUserChange();
     navigate('/');
-  }, []);
+  }, [handleUserChange]);
 
   return (
     <AuthContext.Provider value={{ user, logout, onUserChange: handleUserChange }}>

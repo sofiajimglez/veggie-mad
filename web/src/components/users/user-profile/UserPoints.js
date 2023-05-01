@@ -3,13 +3,13 @@ import React from 'react';
 export default function UserPoints({ user }) {
   return (
     <div className="d-flex flex-column justify-content-center align-items-start px-5">
-      <h3 className='mb-3'>{user.name}</h3>
+      <h3 className='mb-4'>Mis puntos</h3>
       <div className="alert alert-info w-100" role="alert">
         <p className='mb-0 fs-5 py-2'><i class="fa-solid fa-circle-info me-2"></i>Actualmente tienes {user.points} puntos</p>
         <hr />
         <p class="mb-0 fs-6 fw-lighter fst-italic">Puedes ganar puntos guardando tus favoritos, haciendo reseñas en los establecimientos y marcando como visitados los lugares a los que vayas.</p>
       </div>
-      <h3 className='my-3'>Objetivos</h3>
+      <h5 className='my-3'>Objetivos</h5>
       <div className="alert alert-success w-100" role="alert">
         <h4 className="alert-heading">5 puntos</h4>
         <p className="mb-0">¡Holi! Nos hace muy felices verte por aquí, así que te regalamos cinco puntos de bienvenida.</p>
