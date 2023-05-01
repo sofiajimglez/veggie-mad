@@ -9,7 +9,7 @@ export default function UserFavs({ user }) {
   useEffect(() => {
     usersService.get(user.id)
       .then(user => {
-        const favsList = user.favs.map(business => business.business);
+        const favsList = user?.favs.map(business => business.business);
         setFavs(favsList);
       })
       .catch(error => console.error(error));

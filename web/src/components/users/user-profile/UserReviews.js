@@ -9,7 +9,7 @@ export default function UserReviews({ user }) {
   useEffect(() => {
     usersService.get(user.id)
       .then(user => {
-        const reviewsList = user.reviews;
+        const reviewsList = user?.reviews;
         setReviews(reviewsList);
       })
       .catch(error => console.error(error));

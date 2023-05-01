@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import DeleteAccountBtn from '../../buttons/DeleteAccountBtn';
 
 const renderNavLinkActive = ({ isActive }) => isActive ? 'active' : '';
 
-export default function SidebarMenuUser( { isExpanded } ) {
+export default function SidebarMenuUser( { isExpanded, user } ) {
   return (
     <>
       <ul className="nav nav-pills flex-column mb-auto">
@@ -43,10 +44,7 @@ export default function SidebarMenuUser( { isExpanded } ) {
         <i className="fa-solid fa-pen-to-square"></i>
         {isExpanded ? '' : <span className='mx-2'>Editar info</span>}
       </Link>
-      <button className='btn btn-danger mb-2'>
-        <i className="fa-solid fa-trash-can"></i>
-        {isExpanded ? '' : <span className='mx-2'>Eliminar cuenta</span>}
-      </button>
+      <DeleteAccountBtn user={user} isExpanded={isExpanded} />
     </>
   )
 }

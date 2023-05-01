@@ -6,8 +6,11 @@ const login = (business) => http.post('/login/businesses', business);
 
 const get = (id) => http.get(`/businesses/${id}`);
 
+const remove = (id) => http.delete(`/businesses/${id}`);
+
 export default {
   create,
   login, 
-  get
+  get,
+  remove
 }

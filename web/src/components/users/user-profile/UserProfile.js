@@ -18,7 +18,7 @@ export default function UserProfile() {
         <div className="d-flex flex-column flex-shrink-0 p-3 bg-light mx-auto h-auto">
           <button className='btn btn-sm text-end d-none d-md-block' onClick={() => setExpandSidebar(!expandSidebar)}><i className={`fa-solid fa-2xl ${expandSidebar ? 'fa-square-caret-right' : 'fa-square-caret-left'}`}></i></button>
           <hr className='d-none d-md-block' />
-          <SidebarMenuUser isExpanded={expandSidebar} />
+          <SidebarMenuUser isExpanded={expandSidebar} user={user} />
         </div>
       </div>
       <div className={expandSidebar ? 'col-sm-12 col-md-8 col-lg-11' : 'col-sm-12 col-md-8 col-lg-9'}>

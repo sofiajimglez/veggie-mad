@@ -21,7 +21,7 @@ export default function ReviewCard({ review }) {
         <h5>{renderStars(review.rating)}<span className='ms-2 fw-light fs-6'>{review.rating}/5</span></h5>
         <hr />
         <p>{review.text}</p>
-        <p className='fw-lighter fst-italic text-end fs-6 mb-0'><i class="fa-regular fa-clock fa-xs me-2"></i>Publicada {dayjs(review.createdAt).fromNow()}</p>
+        <p className='fw-lighter fst-italic text-end fs-6 mb-0'><i className="fa-regular fa-clock fa-xs me-2"></i>Publicada {dayjs(review.createdAt).fromNow()}</p>
       </div>
     </div>
   )

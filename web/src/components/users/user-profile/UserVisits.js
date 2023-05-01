@@ -9,7 +9,7 @@ export default function UserVisits({ user }) {
   useEffect(() => {
     usersService.get(user.id)
       .then(user => {
-        const visitsList = user.visits.map(business => business.business);
+        const visitsList = user?.visits?.map(business => business.business);
         setVisits(visitsList);
       })
       .catch(error => console.error(error));
