@@ -22,17 +22,17 @@ export default function UserResume({ user }) {
         <div className='d-flex flex-nowrap flex-column justify-content-center align-items-center gap-2 bg-success-subtle px-5 py-4 rounded'>
           <i className="fa-solid fa-xl fa-heart my-3"></i>
           <h6 className='mb-0'>Favoritos</h6>
-          <h3 className='mb-0'>{user?.favs?.length}</h3>
+          <h3 className='mb-0'>{user?.favs?.length || 0 }</h3>
         </div>
         <div className='d-flex flex-nowrap flex-column justify-content-center align-items-center gap-2 bg-success-subtle px-5 py-4 rounded'>
           <i className="fa-solid fa-xl fa-star my-3"></i>
           <h6 className='mb-0'>Reseñas</h6>
-          <h3 className='mb-0'>{user?.reviews?.length}</h3>
+          <h3 className='mb-0'>{user?.reviews?.length || 0}</h3>
         </div>
         <div className='d-flex flex-nowrap flex-column justify-content-center align-items-center gap-2 bg-success-subtle px-5 py-4 rounded'>
           <i className="fa-solid fa-xl fa-store my-3"></i>
           <h6 className='mb-0'>Visitados</h6>
-          <h3 className='mb-0'>{user?.visits?.length}</h3>
+          <h3 className='mb-0'>{user?.visits?.length || 0}</h3>
         </div>
       </div>
 

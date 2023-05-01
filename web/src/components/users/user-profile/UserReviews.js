@@ -18,7 +18,11 @@ export default function UserReviews({ user }) {
   return (
     <div className="row px-5 py-3">
       <h3 className='mb-4'>Mis reseñas</h3>
-      {reviews.map(review => <ReviewCard review={review} key={review.id} />)}
+      {reviews.length > 0 ? reviews.map(review => <ReviewCard review={review} key={review.id} />) :
+        <div className="alert alert-info w-100">
+          <p className='mb-0 fw-lighter'>Aquí mostraremos las reseñas que dejes en los establecimientos. ¡Vuelve cuando hayas escrito alguna! ✍🏻</p>
+        </div>
+      }
     </div>
   )
 }
