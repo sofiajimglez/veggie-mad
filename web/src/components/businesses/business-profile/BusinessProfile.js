@@ -1,14 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthUserStore';
-import SidebarMenuUser from './SidebarMenuUser';
-import UserResume from './UserResume';
-import UserPoints from './UserPoints';
-import UserFavs from './UserFavs';
-import UserVisits from './UserVisits';
-import UserReviews from './UserReviews';
-import UsersUpdateForm from '../UsersUpdateForm';
+import SidebarMenuBusiness from './SidebarMenuBusiness';
+import BusinessUpdateForm from './BusinessUpdateForm';
 
-export default function UserProfile() {
+
+export default function BusinessProfile() {
 
   const { user } = useContext(AuthContext);
   const [expandSidebar, setExpandSidebar] = useState(false);
@@ -19,17 +15,14 @@ export default function UserProfile() {
         <div className="d-flex flex-column flex-shrink-0 p-3 bg-light mx-auto h-auto">
           <button className='btn btn-sm text-end d-none d-md-block' onClick={() => setExpandSidebar(!expandSidebar)}><i className={`fa-solid fa-2xl ${expandSidebar ? 'fa-square-caret-right' : 'fa-square-caret-left'}`}></i></button>
           <hr className='d-none d-md-block' />
-          <SidebarMenuUser isExpanded={expandSidebar} user={user} />
+          <SidebarMenuBusiness isExpanded={expandSidebar} user={user} />
         </div>
       </div>
       <div className={expandSidebar ? 'col-sm-12 col-md-8 col-lg-11' : 'col-sm-12 col-md-8 col-lg-9'}>
-        <UserResume user={user} />
-        <UserPoints user={user} />
-        <UserFavs user={user} />
-        <UserVisits user={user} />
-        <UserReviews user={user} />
-        <UsersUpdateForm user={user} />
-
+        <p>Prueba</p>
+        <p>{user.username}</p>
+        <p>{user.id}</p>
+        <BusinessUpdateForm business={user} />
       </div>
     </div>
   )
