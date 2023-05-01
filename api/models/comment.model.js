@@ -14,7 +14,8 @@ const commentSchema = new Schema({
   },
   text: {
     type: String,
-    minlength: [10, 'Escribe al menos 10 caracteres']
+    minlength: [10, 'Escribe al menos 10 caracteres'],
+    required: [true, 'El texto es obligatorio']
   }
 },
 {

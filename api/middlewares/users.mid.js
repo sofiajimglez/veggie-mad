@@ -5,7 +5,7 @@ module.exports.exists = (req, res, next) => {
   User.findById(req.params.id)
     .populate({ path: 'favs', populate: 'business' })
     .populate({ path: 'visits', populate: 'business' })
-    .populate({ path: 'reviews', populate: 'business' })
+    .populate({ path: 'reviews', populate: 'business comments' })
     .then(user => {
       if (user) {
         req.user = user;

@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthUserStore';
 import SidebarMenuBusiness from './SidebarMenuBusiness';
 import BusinessUpdateForm from './BusinessUpdateForm';
+import BusinessReviews from './BusinessReviews';
 
 
 export default function BusinessProfile() {
@@ -19,9 +20,7 @@ export default function BusinessProfile() {
         </div>
       </div>
       <div className={expandSidebar ? 'col-sm-12 col-md-8 col-lg-11' : 'col-sm-12 col-md-8 col-lg-9'}>
-        <p>Prueba</p>
-        <p>{user.username}</p>
-        <p>{user.id}</p>
+        <BusinessReviews user={user} />
         <BusinessUpdateForm business={user} />
       </div>
     </div>

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import usersService from '../../../services/users';
+import businessService from '../../../services/businesses';
 import ReviewCard from '../../reviews/ReviewCard';
 
-export default function UserReviews({ user }) {
+export default function BusinessReviews({ user }) {
 
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    usersService.get(user.id)
+    businessService.get(user.id)
       .then(user => {
         const reviewsList = user?.reviews;
         setReviews(reviewsList);
@@ -18,9 +18,9 @@ export default function UserReviews({ user }) {
   return (
     <div className="row px-5 py-3">
       <h3 className='mb-4'>Mis reseñas</h3>
-      {reviews.length > 0 ? reviews.map(review => <ReviewCard review={review} user={user} key={review.id} />) :
+      {reviews.length > 0 ? reviews.map(review => <ReviewCard review={review} key={review.id} user={user} />) :
         <div className="alert alert-info w-100">
-          <p className='mb-0 fw-lighter'>Aquí mostraremos las reseñas que dejes en los establecimientos. ¡Vuelve cuando hayas escrito alguna! ✍🏻</p>
+          <p className='mb-0 fw-lighter'>Aquí mostraremos las reseñas que te dejen nuestros usuarios. ¡Vuelve pronto para leerlas! ✍🏻</p>
         </div>
       }
     </div>
