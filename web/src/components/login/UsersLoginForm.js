@@ -68,7 +68,7 @@ export default function UsersLoginForm({ mode }) {
             id='password'
             className={`form-control ${errors.password ? 'is-invalid' : ''}`}
             placeholder='••••••••'
-            {...register('password', { required: 'Por favor, establece una contraseña' })} />
+            {...register('password', { required: 'La contraseña es obligatoria' })} />
         {errors.password && <p className='invalid-feedback'>{errors.password?.message}</p>}
         </div>
       </div>
