@@ -16,7 +16,6 @@ function renderStars(num) {
 
 export default function ReviewCard({ review, user }) {
   const [seeCommentForm, setSeeCommentForm] = useState(false);
-  console.log('holi', review);
 
   return (
     <div className="card w-100 mb-4">

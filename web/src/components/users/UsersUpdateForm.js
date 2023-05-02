@@ -141,7 +141,7 @@ export default function UsersUpdateForm({ user }) {
       {/* imageUrl */}
       <div className='mb-3'>
         <div className='input-group'>
-          <span className="input-group-text"><i className='fa-solid fa-envelope'></i></span>
+        <span className="input-group-text"><i className='fa-solid fa-image'></i></span>
           <input
             type='file'
             id='imageUrl'

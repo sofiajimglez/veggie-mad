@@ -54,15 +54,15 @@ export default function BusinessUpdateForm({ business }) {
     }
   };
 
-  const onBusinessUpdate = (business) => {
+  const onBusinessUpdate = (updatedBusiness) => {
     setServerError();
     console.debug('Updating business...');
-    business.location = business.location.location;
+    updatedBusiness.location = updatedBusiness.location.location;
 
-    businessesService.update(business, business.id)
-      .then(() => {
-        console.info('Business updated!')
-        navigate('/profile');
+    businessesService.update(business.id, updatedBusiness)
+      .then((business) => {
+        console.info('Business updated!', business);
+        navigate('../login', { replace: true });
       })
       .catch(error => {
         const errors = error.response?.data?.errors;
@@ -152,7 +152,7 @@ export default function BusinessUpdateForm({ business }) {
       {/* Description */}
       <div className='mb-3'>
         <div className='input-group'>
-          <span className="input-group-text"><i className='fa-solid fa-face-smile'></i></span>
+          <span className="input-group-text"><i className="fa-solid fa-paragraph"></i></span>
           <input
             type='text'
             id='description'
@@ -240,7 +240,7 @@ export default function BusinessUpdateForm({ business }) {
       {/* imageUrl */}
       <div className='mb-3'>
         <div className='input-group'>
-          <span className="input-group-text"><i className='fa-solid fa-envelope'></i></span>
+          <span className="input-group-text"><i className='fa-solid fa-image'></i></span>
           <input
             type='file'
             id='imageUrl'
@@ -254,7 +254,7 @@ export default function BusinessUpdateForm({ business }) {
       {/* Tags */}
       <div className='mb-3 w-100'>
         <div className='input-group flex-fill'>
-          <span className="input-group-text"><i className='fa-solid fa-briefcase'></i></span>
+          <span className="input-group-text"><i className='fa-solid fa-tags'></i></span>
           <Controller
             control={control}
             name='tags'
@@ -286,7 +286,7 @@ export default function BusinessUpdateForm({ business }) {
       {/* Facebook */}
       <div className='mb-3'>
         <div className='input-group'>
-          <span className="input-group-text"><i className='fa-solid fa-at'></i></span>
+          <span className="input-group-text"><i className="fa-brands fa-facebook-f"></i></span>
           <input
             id='facebookUrl'
             type='text'
@@ -300,7 +300,7 @@ export default function BusinessUpdateForm({ business }) {
       {/* Instagram */}
       <div className='mb-3'>
         <div className='input-group'>
-          <span className="input-group-text"><i className='fa-solid fa-at'></i></span>
+          <span className="input-group-text"><i className="fa-brands fa-instagram"></i></span>
           <input
             id='instagramUrl'
             type='text'
@@ -314,7 +314,7 @@ export default function BusinessUpdateForm({ business }) {
       {/* Twitter */}
       <div className='mb-3'>
         <div className='input-group'>
-          <span className="input-group-text"><i className='fa-solid fa-at'></i></span>
+          <span className="input-group-text"><i className="fa-brands fa-twitter"></i></span>
           <input
             id='twitterUrl'
             type='text'
