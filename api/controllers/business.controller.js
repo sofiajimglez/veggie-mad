@@ -3,8 +3,9 @@ const { generateLoyaltyCode } = require('../utils/loyaltyCode');
 const createError = require('http-errors');
 const jwt = require('jsonwebtoken');
 const mailer = require('../config/mailer.config');
+const moment = require('moment');
 
-const maxSessionTime = parseInt(process.env.MAX_SESSION_TIME || 3_600);
+const MAX_SESSION_DAYS = parseInt(process.env.MAX_SESSION_DAYS || 1);
 
 module.exports.create = (req, res, next) => {
   const { location } = req.body;
@@ -75,8 +76,8 @@ module.exports.login = (req, res, next) => {
           } else if (!business.confirm) {
             return next(createError(401, { errors: { username: 'Revisa tu bandeja de entrada y confirma tu cuenta para acceder' }}));
           };
-
-          const token = jwt.sign({ sub: business.id, exp: Date.now() / 1000 + maxSessionTime }, process.env.JWT_SECRET) //generates a token for authentication that expirates
+          
+          const token = jwt.sign({ sub: business.id, exp: moment().add(MAX_SESSION_DAYS, 'days').valueOf() / 1000 }, process.env.JWT_SECRET); //generates a token for authentication
           res.json({ token, ...business.toJSON() });
         });
     })

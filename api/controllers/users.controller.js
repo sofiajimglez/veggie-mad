@@ -64,7 +64,7 @@ module.exports.login = (req, res, next) => {
             return next(createError(401, { errors: { username: 'Revisa tu bandeja de entrada y confirma tu cuenta para acceder' }}));
           };
 
-          const token = jwt.sign({ sub: user.id, exp: moment().add(MAX_SESSION_DAYS, 'days').valueOf() / 1000 }, process.env.JWT_SECRET); //generates a token for authentication that expirates in 1 hour
+          const token = jwt.sign({ sub: user.id, exp: moment().add(MAX_SESSION_DAYS, 'days').valueOf() / 1000 }, process.env.JWT_SECRET); //generates a token for authentication
           res.json({ token, ...user.toJSON() });
         });
     })
