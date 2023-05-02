@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthUserStore';
 import businessService from '../../../services/businesses';
 
@@ -15,8 +15,6 @@ export default function FavForm({ businessId }) {
       console.error(error);
     }
   };
-
-  console.log(user);
 
   if (!user) {
     return (

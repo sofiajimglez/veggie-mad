@@ -121,7 +121,6 @@ export default function BusinessRegisterForm() {
                   placeholder: 'Calle de Concepción Arenal, s/n, Madrid',
                   value: value?.result,
                   onChange: async (result) => {
-                    console.log(result);
                     const places = await geocodeByPlaceId(result.value.place_id);
                     const { lat, lng } = await getLatLng(places[0]);
                     onChange({ result, location: { address: result.label, coordinates: [lat, lng] } });
