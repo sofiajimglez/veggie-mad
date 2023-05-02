@@ -3,6 +3,10 @@ import { AuthContext } from '../../../contexts/AuthUserStore';
 import SidebarMenuBusiness from './SidebarMenuBusiness';
 import BusinessUpdateForm from './BusinessUpdateForm';
 import BusinessReviews from './BusinessReviews';
+import BusinessCode from './BusinessCode';
+import BusinessFavs from './BusinessFavs';
+import BusinessVisits from './BusinessVisits';
+import BusinessResume from './BusinessResume';
 
 
 export default function BusinessProfile() {
@@ -20,7 +24,12 @@ export default function BusinessProfile() {
         </div>
       </div>
       <div className={expandSidebar ? 'col-sm-12 col-md-8 col-lg-11' : 'col-sm-12 col-md-8 col-lg-9'}>
+        <BusinessResume user={user} />
+        <BusinessCode user={user} />
+        {/* To do: gallery */}
+        <BusinessFavs user={user} />
         <BusinessReviews user={user} />
+        <BusinessVisits user={user} />
         <BusinessUpdateForm business={user} />
       </div>
     </div>
