@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthUserStore';
-import usersService from '../../../services/users';
 import businessService from '../../../services/businesses';
 
 export default function FavForm({ businessId }) {

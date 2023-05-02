@@ -17,8 +17,8 @@ module.exports.toggle = (req, res, next) => {
       };
     })
     .then(accumulatedPoints => {
-      const { currentPoints } = req.loggedUser;
-      Object.assign(req.loggedUser, { points: currentPoints + accumulatedPoints });
+      const { points } = req.loggedUser;
+      Object.assign(req.loggedUser, { points: points + accumulatedPoints });
       return req.loggedUser.save()
         .then((user) => res.status(201).json(user));
     })

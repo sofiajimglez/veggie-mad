@@ -20,10 +20,11 @@ function AuthUserStore({ children }) {
   const navigate = useNavigate();
 
   const handleUserChange = useCallback((userToUpdate) => {
-      if (userToUpdate && !userToUpdate.token && user?.token) {
-        userToUpdate.token = user.token;
-      }
+    if (userToUpdate && !userToUpdate.token && user?.token) {
+      userToUpdate.token = user.token;
+    }
 
+    if (JSON.stringify(userToUpdate) !== JSON.stringify(user)) {
       console.info('Updated user context', userToUpdate);
       if (!userToUpdate) {
         localStorage.removeItem('current-user');
@@ -33,7 +34,8 @@ function AuthUserStore({ children }) {
         localStorage.setItem('user-access-token', userToUpdate.token);
       }
       setUser(userToUpdate);
-  }, []);
+    }
+  }, [user]);
   
   useEffect(() => {
     async function fetchUser() {
@@ -52,7 +54,7 @@ function AuthUserStore({ children }) {
   const logout = useCallback(() => {
     handleUserChange();
     navigate('/');
-  }, [handleUserChange]);
+  }, [handleUserChange, navigate]);
 
   return (
     <AuthContext.Provider value={{ user, logout, onUserChange: handleUserChange }}>
