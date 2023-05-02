@@ -4,14 +4,7 @@ import reviewService from '../../services/review';
 import { useNavigate } from 'react-router-dom';
 
 export default function CommentForm({ review, business }) {
-  const { register, handleSubmit, setError, reset, formState: { errors } } = useForm(
-    {
-      mode: 'onBlur',
-      defaultValues: {
-        business: business,
-        review: review
-      }
-    });
+  const { register, handleSubmit, setError, reset, formState: { errors } } = useForm({ mode: 'onBlur' });
 
   const [serverError, setServerError] = useState();
   const navigate = useNavigate();
@@ -50,7 +43,7 @@ export default function CommentForm({ review, business }) {
           placeholder='Deja una respuesta a la reseña...'
           {...register('text', { required: 'El texto es obligatorio' })} />
         {errors.name && <p className='invalid-feedback'>{errors.name?.message}</p>}
-        <label htmlFor="floatingTextarea">Comentar</label>
+        <label htmlFor="floatingTextarea">Deja tu comentario...</label>
       </div>
 
       <button type='submit' className='btn btn-primary w-100'>Enviar</button>
