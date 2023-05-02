@@ -19,16 +19,20 @@ function AuthUserStore({ children }) {
   const [user, setUser] = useState(restoreUserFromLocalStorage);
   const navigate = useNavigate();
 
-  const handleUserChange = useCallback((user) => {
-      console.info('Updated user context', user);
-      if (!user) {
+  const handleUserChange = useCallback((userToUpdate) => {
+      if (userToUpdate && !userToUpdate.token && user?.token) {
+        userToUpdate.token = user.token;
+      }
+
+      console.info('Updated user context', userToUpdate);
+      if (!userToUpdate) {
         localStorage.removeItem('current-user');
         localStorage.removeItem('user-access-token');
       } else {
-        localStorage.setItem('current-user', JSON.stringify(user));
-        localStorage.setItem('user-access-token', user.token);
+        localStorage.setItem('current-user', JSON.stringify(userToUpdate));
+        localStorage.setItem('user-access-token', userToUpdate.token);
       }
-      setUser(user);
+      setUser(userToUpdate);
   }, []);
   
   useEffect(() => {

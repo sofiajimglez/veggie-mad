@@ -10,16 +10,17 @@ module.exports.toggle = (req, res, next) => {
     .then(fav => {
       if (fav) { //if exists, it's deleted
         return Fav.deleteOne({ _id: fav.id })
-          .then(() => res.status(204).send());
+          .then(() => -2);
       } else { //if doesn't exist, it's created
         return Fav.create(params)
-          .then(fav => {
-            const { points } = req.loggedUser;
-            Object.assign(req.loggedUser, { points: points + 2 });
-            return req.loggedUser.save()
-              .then(() => res.json(fav));
-          });
+          .then(() => 2);
       };
+    })
+    .then(accumulatedPoints => {
+      const { currentPoints } = req.loggedUser;
+      Object.assign(req.loggedUser, { points: currentPoints + accumulatedPoints });
+      return req.loggedUser.save()
+        .then((user) => res.status(201).json(user));
     })
     .catch(next);
 };

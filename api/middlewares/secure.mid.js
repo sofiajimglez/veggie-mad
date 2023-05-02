@@ -16,6 +16,9 @@ module.exports.cleanBody = (req, res, next) => { //deletes inputs from req.body 
 
 module.exports.userAuth = (req, res, next) => {
   const token = req.headers.authorization?.split(' ')?.[1]; //[0]-Bearer [1]-token
+  console.log('aquí va el token', token);
+  console.log('esto es el req headers auth', req.headers.authorization);
+  console.log('secret', process.env.JWT_SECRET);
 
   if (!token) {
     return next(createError(401, 'No se encuentra el token de acceso'));
@@ -25,6 +28,7 @@ module.exports.userAuth = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     User.findById(decoded.sub)
       .then(user => {
+        console.log('aquí va el user', user);
         if (user) {
           req.loggedUser = user;
           next();

@@ -8,6 +8,8 @@ import PrivateRoute from "./guards/PrivateRoute";
 import ProfilePage from "./pages/ProfilePage";
 import Footer from "./components/footer/Footer";
 import BusinessRegisterPage from "./pages/BusinessRegisterPage";
+import ExplorePage from "./pages/ExplorePage";
+import BusinessPage from "./pages/BusinessPage";
 
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path='/profile' element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
           <Route path='/negocio' element={<PrivateRoute role='business'><ProfilePage /></PrivateRoute>} />
+          <Route path='/explora-madrid' element={<ExplorePage />} />
+          <Route path='/explora-madrid/:businessId' element={<BusinessPage />} />
         </Routes>
         <Footer />
       </AuthUserStore>

@@ -9,7 +9,7 @@ export default function BusinessCard({ business, styles }) {
         <div className="card-body">
           <h5 className="card-title">{business.name}</h5>
           <p className="card-text">{business.category}</p>
-          <Link to={`/businesses/${business.id}`} className="btn btn-primary w-100">Ver</Link>
+          <Link to={`/explora-madrid/${business.id}`} className="btn btn-primary w-100">Ver</Link>
         </div>
       </div>
     </div>

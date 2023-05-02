@@ -30,8 +30,8 @@ export default function BusinessVisits({ user }) {
           </div>
 
           <h5 className='my-3'>Actividad reciente</h5>
-          {visits.map((visit) => <div class="card mb-3" key={visit.id}>
-            <div class="card-body">
+          {visits.map((visit) => <div className="card mb-3" key={visit.id}>
+            <div className="card-body">
               <p className='mb-0'>🐻 <strong>{visit.user.name}</strong> te ha marcado como visitado {dayjs(visit.createdAt).fromNow()}</p>
             </div>
           </div>)}

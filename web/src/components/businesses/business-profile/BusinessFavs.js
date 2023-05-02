@@ -30,8 +30,8 @@ export default function BusinessFavs({ user }) {
           </div>
 
           <h5 className='my-3'>Actividad reciente</h5>
-          {favs.map((fav) => <div class="card mb-3" key={fav.id}>
-            <div class="card-body">
+          {favs.map((fav) => <div className="card mb-3" key={fav.id}>
+            <div className="card-body">
               <p className='mb-0'>🐻 <strong>{fav.user.name}</strong> te ha marcado como favorito {dayjs(fav.createdAt).fromNow()}</p>
             </div>
           </div>)}
