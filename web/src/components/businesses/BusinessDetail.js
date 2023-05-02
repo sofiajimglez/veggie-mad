@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import businessService from '../../services/businesses';
 import FavForm from './business-actions/FavForm';
+import ReviewForm from './business-actions/ReviewForm';
 
 export default function BusinessDetail() {
   const { businessId } = useParams();
@@ -26,6 +27,8 @@ export default function BusinessDetail() {
         <div>
           <h1>{business.name}</h1>
           <FavForm businessId={businessId} />
+          <h3>Reseñas</h3>
+          <ReviewForm business={businessId} />
         </div>
       }
     </>
