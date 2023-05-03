@@ -10,6 +10,7 @@ export default function UsersUpdateForm({ user }) {
       mode: 'onBlur',
       defaultValues: {
         username: user.username,
+        location: user.location,
         name: user.name,
         email: user.email,
         imageUrl: user.imageUrl
@@ -19,12 +20,12 @@ export default function UsersUpdateForm({ user }) {
   const [serverError, setServerError] = useState();
   const navigate = useNavigate();
 
-  const onUserUpdate = async (user) => {
+  const onUserUpdate = async (updatedUser) => {
     try {
       setServerError();
       console.debug('Updating user...');
-      user.location = user.location.location;
-      await usersService.patch(user, user.id);
+      updatedUser.location = updatedUser.location.location;
+      await usersService.update(user, updatedUser);
       navigate('/profile');
     } catch (error) {
       const errors = error.response?.data?.errors;
@@ -38,7 +39,7 @@ export default function UsersUpdateForm({ user }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onUserUpdate)} className='px-5 py-3'>
+    <form onSubmit={handleSubmit(onUserUpdate)} encType='multipart/form-data' className='px-5 py-3'>
       <h3 className='mb-4'>Edita tus datos</h3>
 
       {/* Server error feedback */}

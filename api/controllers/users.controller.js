@@ -37,6 +37,13 @@ module.exports.update = (req, res, next) => {
     req.body.imageUrl = req.file.path;
   };
 
+  const { location } = req.body;
+  req.body.address = location?.address;
+  req.body.location = {
+    type: 'Point',
+    coordinates: location?.coordinates?.reverse(),
+  }
+  
   Object.assign(req.user, req.body);
   req.user.save()
     .then(user => res.json(user))

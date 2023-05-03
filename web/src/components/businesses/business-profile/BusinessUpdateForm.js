@@ -22,6 +22,7 @@ export default function BusinessUpdateForm({ business }) {
         facebookUrl: business.facebookUrl,
         instagramUrl: business.instagramUrl,
         twitterUrl: business.twitterUrl,
+        location: business.location
       }
     });
 
@@ -53,18 +54,16 @@ export default function BusinessUpdateForm({ business }) {
         break;
     }
   };
+  // Ends tags config
 
-  const onBusinessUpdate = (updatedBusiness) => {
-    setServerError();
-    console.debug('Updating business...');
-    updatedBusiness.location = updatedBusiness.location.location;
-
-    businessesService.update(business.id, updatedBusiness)
-      .then((business) => {
-        console.info('Business updated!', business);
-        navigate('../login', { replace: true });
-      })
-      .catch(error => {
+  const onBusinessUpdate =  async (updatedBusiness) => {
+    try {
+      setServerError();
+      console.debug('Updating business...');
+      updatedBusiness.location = updatedBusiness.location.location;
+      await businessesService.update( business, updatedBusiness);
+      navigate('/profile');
+    } catch (error) {
         const errors = error.response?.data?.errors;
         if (errors) {
           Object.keys(errors)
@@ -72,11 +71,11 @@ export default function BusinessUpdateForm({ business }) {
         } else {
           setServerError(error.message);
         };
-      })
+      };
   };
 
   return (
-    <form onSubmit={handleSubmit(onBusinessUpdate)} className='px-5 py-3'>
+    <form onSubmit={handleSubmit(onBusinessUpdate)} encType='multipart/form-data' className='px-5 py-3'>
       <h3 className='mb-4'>Edita tus datos</h3>
 
       {/* Server error feedback */}

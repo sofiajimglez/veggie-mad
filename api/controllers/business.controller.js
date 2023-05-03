@@ -50,6 +50,13 @@ module.exports.update = (req, res, next) => {
     req.body.gallery = req.files.map(file => file.path);
   };
 
+  const { location } = req.body;
+  req.body.address = location?.address;
+  req.body.location = {
+    type: 'Point',
+    coordinates: location?.coordinates?.reverse(),
+  }
+
   Object.assign(req.business, req.body);
   req.business.save()
     .then(business => res.json(business))

@@ -8,7 +8,15 @@ const list = () => http.get('/businesses');
 
 const get = (id) => http.get(`/businesses/${id}`);
 
-const update = (id, business) => http.patch(`/businesses/${id}`, business);
+const update = (business, updatedBusiness) => {
+  const data = new FormData();
+  data.append('username', updatedBusiness.username);
+  data.append('name', updatedBusiness.name);
+  data.append('email', updatedBusiness.email);
+  data.append('location', updatedBusiness.location);
+  data.append('imageUrl', updatedBusiness.imageUrl[0]);
+  return http.patch(`/businesses/${business.id}`, updatedBusiness);
+};
 
 const remove = (id) => http.delete(`/businesses/${id}`);
 
