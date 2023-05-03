@@ -14,7 +14,7 @@ const remove = (id) => http.delete(`/businesses/${id}`);
 
 const fav = (id) => http.post(`/businesses/${id}/fav`);
 
-const visit = (id, visit) => http.post(`/businesses/${id}/fav`, visit);
+const visit = (id, visit) => http.post(`/businesses/${id}/visit`, visit);
 
 export default {
   create,

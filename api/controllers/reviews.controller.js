@@ -12,11 +12,11 @@ module.exports.create = (req, res, next) => {
 
   if (req.loggedUser.points >= 10) {
     Review.create(params)
-      .then(review => {
+      .then(() => {
         const { points } = req.loggedUser;
         Object.assign(req.loggedUser, { points: points + 4 });
         return req.loggedUser.save()
-          .then(() => res.status(201).json(review));
+          .then((user) => res.status(201).json(user));
         })
       .catch(next);
   } else {

@@ -17,14 +17,12 @@ module.exports.create = (req, res, next) => {
         return next(createError(403, 'El código de visita es incorrecto'));
       } else {
         return Visit.create(params)
-          .then(() => 6)
+          .then(() => {
+            const { points } = req.loggedUser;
+            Object.assign(req.loggedUser, { points: points + 6 });
+            return req.loggedUser.save()
+              .then((user) => res.status(201).json(user))
+          })
+          .catch(next);
       }
-    })
-    .then(accumulatedPoints => {
-      const { points } = req.loggedUser;
-      Object.assign(req.loggedUser, { points: points + accumulatedPoints });
-      return req.loggedUser.save()
-        .then((user) => res.status(201).json(user));
-    })
-    .catch(next);
-};
+    })};
