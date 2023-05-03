@@ -6,7 +6,7 @@ module.exports.create = (req, res, next) => {
     user: req.loggedUser.id,
     business: req.business.id
   };
-  
+
   Visit.findOne(params)
     .then(visit => {
       if (visit) {
@@ -17,13 +17,14 @@ module.exports.create = (req, res, next) => {
         return next(createError(403, 'El código de visita es incorrecto'));
       } else {
         return Visit.create(params)
-          .then(visit => {
-            const { points } = req.loggedUser;
-            Object.assign(req.loggedUser, { points: points + 6 });
-            return req.loggedUser.save()
-              .then(() => res.status(201).json(visit));
-          })
+          .then(() => 6)
       }
+    })
+    .then(accumulatedPoints => {
+      const { points } = req.loggedUser;
+      Object.assign(req.loggedUser, { points: points + accumulatedPoints });
+      return req.loggedUser.save()
+        .then((user) => res.status(201).json(user));
     })
     .catch(next);
 };

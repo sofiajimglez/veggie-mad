@@ -14,6 +14,8 @@ const remove = (id) => http.delete(`/businesses/${id}`);
 
 const fav = (id) => http.post(`/businesses/${id}/fav`);
 
+const visit = (id, visit) => http.post(`/businesses/${id}/fav`, visit);
+
 export default {
   create,
   login, 
@@ -21,5 +23,6 @@ export default {
   remove,
   update,
   list,
-  fav
+  fav,
+  visit
 }

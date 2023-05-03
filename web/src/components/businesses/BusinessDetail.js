@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import businessService from '../../services/businesses';
 import FavForm from './business-actions/FavForm';
 import ReviewForm from './business-actions/ReviewForm';
+import VisitForm from './business-actions/VisitForm';
 
 export default function BusinessDetail() {
   const { businessId } = useParams();
@@ -29,6 +30,8 @@ export default function BusinessDetail() {
           <FavForm businessId={businessId} />
           <h3>Reseñas</h3>
           <ReviewForm business={businessId} />
+          <h3>Visita</h3>
+          <VisitForm businessId={businessId} />
         </div>
       }
     </>
