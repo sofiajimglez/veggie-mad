@@ -1,9 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Patrick+Hand&family=Plaster&display=swap');
-/* font-family: 'Dongle', sans-serif;
-font-family: 'Patrick Hand', cursive;
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Quicksand:wght@400;600;700&display=swap&family=Plaster&display=swap');
+/* font-family: 'Quicksand', sans-serif;
+font-family: 'Lilita One', cursive;
 font-family: 'Plaster', cursive; */
 
+h1 {
+  font-family: 'Lilita One', cursive;
+}
 
+h2, h3 {
+  font-family: 'Quicksand', cursive;
+  font-weight: 700;
+}
+
+h4, h5, h6 {
+  font-family: 'Quicksand', cursive;
+  font-weight: 600;
+}
+
+p {
+  font-family: 'Quicksand', cursive;
+  font-weight: 400;
+}
 
 
 /* NAVBAR */
@@ -28,4 +45,45 @@ footer {
 .page-layout .container {
   padding-bottom: 60px;
   padding-top: 20px;
+}
+
+/* Buttons */
+.btn-main {
+  font-family: 'Quicksand', cursive;
+  font-weight: 600;
+  background-color: #A7C565;
+  border: 1.5px solid #A7C565;
+}
+
+.btn-main:hover {
+  background-color: #3A4523;
+  border:1.5px solid #3A4523;
+  color: whitesmoke;
+}
+
+.btn-second {
+  font-family: 'Quicksand', cursive;
+  font-weight: 600;
+  background-color: #C45A8D;
+  border: 1.5px solid #C45A8D;
+  color: whitesmoke;
+}
+
+.btn-second:hover {
+  background-color: #783153;
+  border:1.5px solid #783153;
+  color: whitesmoke;
+}
+
+.btn-second-line {
+  font-family: 'Quicksand', cursive;
+  font-weight: 600;
+  background-color: transparent;
+  border: 1.5px solid #C45A8D;
+  color: #C45A8D;
+}
+
+.btn-second-line:hover {
+  background-color: #783153;
+  border: 1.5px solid #783153;
 }
