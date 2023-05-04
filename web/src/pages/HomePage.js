@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PageLayout from '../components/layout/PageLayout';
-import Header from '../components/header/Header';
+import Header from '../components/home/Header';
+import Categories from '../components/home/Categories';
+import BusinessBanner from '../components/home/BusinessBanner';
+import PointsBanner from '../components/home/PointsBanner';
+import { AuthContext } from '../contexts/AuthUserStore';
 
 export default function HomePage() {
+  const { user } = useContext(AuthContext);
+
   return (
     <>
-      <Header />
-      <PageLayout title='Bienvenido a veggieMAD' >
+      <Header user={user} />
+      <PageLayout title='¡Bienvenido! • Welcome! • Bem-vindo! • Bienvenue! • Benvenuto! • Willkommen! • 喜ばしい! • 환영하다! • 受欢迎的!' >
+        <Categories />
+        <BusinessBanner />
+        <PointsBanner user={user} />
       </PageLayout>
     </>
   )

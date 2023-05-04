@@ -1,11 +1,8 @@
-import React, { useContext } from 'react';
-import './Header.css';
+import React from 'react';
+import './Home.css';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthUserStore';
 
-export default function Header() {
-  const { user } = useContext(AuthContext);
-
+export default function Header({ user }) {
   return (
     <div className="top-header text-center py-5">
     <h1 className="display-5 ">Descubre Madrid</h1>

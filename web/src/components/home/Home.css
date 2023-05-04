@@ -1,0 +1,30 @@
+/* Home */
+.category-home {
+  background-color: #C45A8D;
+  border-radius: 10px;
+  color: whitesmoke;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.category-home:hover {
+  box-shadow: rgba(120, 49, 83, 0.4) 0px 0px 0px 2px, rgba(120, 49, 83, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.top-header {
+  background-image: url('../../assets/img/madrid-header-img.jpg');
+  background-position: center;
+  background-size: cover;
+  color: whitesmoke;
+}
+
+.banner-left {
+  border-left: 15px solid #3A4523;
+}
+
+.banner-right {
+  border-right: 15px solid #C45A8D;
+}
+
+.banner-img {
+  width: 100%;
+}
