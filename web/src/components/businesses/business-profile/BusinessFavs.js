@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { AuthContext } from '../../../contexts/AuthUserStore';
 import businessService from '../../../services/businesses';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -6,7 +7,8 @@ import es from "dayjs/locale/es";
 dayjs.extend(relativeTime);
 dayjs.locale('es');
 
-export default function BusinessFavs({ user }) {
+export default function BusinessFavs() {
+  const { user } = useContext(AuthContext);
 
   const [favs, setFavs] = useState([]);
 

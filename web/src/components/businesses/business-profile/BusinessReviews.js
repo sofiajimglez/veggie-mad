@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { AuthContext } from '../../../contexts/AuthUserStore';
 import businessService from '../../../services/businesses';
 import ReviewCard from '../../reviews/ReviewCard';
 
-export default function BusinessReviews({ user }) {
+export default function BusinessReviews() {
 
   const [reviews, setReviews] = useState([]);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     businessService.get(user.id)

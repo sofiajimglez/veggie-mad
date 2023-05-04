@@ -71,7 +71,7 @@ const businessSchema = new Schema({
     }),
     validate: {
       validator: function (location) {
-        return this.address != undefined && location.coordinates?.length > 0;
+        return this.address !== undefined && location.coordinates?.length > 0;
       },
       message: 'La localización es obligatoria'
     }

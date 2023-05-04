@@ -4,13 +4,13 @@ import BusinessProfile from '../components/businesses/business-profile/BusinessP
 import PageLayout from '../components/layout/PageLayout';
 import { AuthContext } from '../contexts/AuthUserStore';
 
-export default function ProfilePage() {
+export default function ProfilePage({ children }) {
   const { user } = useContext(AuthContext);
 
   return (
     <PageLayout title="Bienvenido a tu espacio personal">
       {user?.role === 'user' && <UserProfile />}
-      {user?.role === 'business' && <BusinessProfile />}
+      {user?.role === 'business' && <BusinessProfile>{ children }</BusinessProfile>}
     </PageLayout>
   )
 }

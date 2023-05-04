@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthUserStore';
 import businessService from '../../../services/businesses';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -6,9 +7,10 @@ import es from "dayjs/locale/es";
 dayjs.extend(relativeTime);
 dayjs.locale('es');
 
-export default function BusinessVisits({ user }) {
+export default function BusinessVisits() {
 
   const [visits, setVisits] = useState([]);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     businessService.get(user.id)

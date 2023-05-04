@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthUserStore';
 import businessService from '../../../services/businesses';
+import { Link } from 'react-router-dom';
 
 export default function FavForm({ businessId }) {
 
@@ -18,9 +19,9 @@ export default function FavForm({ businessId }) {
 
   if (!user) {
     return (
-      <button className="btn btn-danger w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Inicia sesión para guardar tus favoritos" disabled>
+      <Link className="btn btn-danger w-100" to='/login'>
         <i className="fa-solid fa-heart me-2"></i>Fav
-      </button>
+      </Link>
     )
   } else if (user.role === 'user') {
     return (

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthUserStore';
 import { useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import businessesService from '../../../services/businesses';
@@ -6,23 +7,24 @@ import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import GooglePlacesAutocomplete, { geocodeByPlaceId, getLatLng } from 'react-google-places-autocomplete';
 
-export default function BusinessUpdateForm({ business }) {
+export default function BusinessUpdateForm() {
+  const { user } = useContext(AuthContext);
   const { register, handleSubmit, setError, control, formState: { errors } } = useForm(
     {
       mode: 'onBlur',
       defaultValues: {
-        username: business.username,
-        name: business.name,
-        email: business.email,
-        description: business.description,
-        category: business.category,
-        price: business.price || 3,
-        tags: business.tags || [],
-        imageUrl: business.imageUrl,
-        facebookUrl: business.facebookUrl,
-        instagramUrl: business.instagramUrl,
-        twitterUrl: business.twitterUrl,
-        location: business.location
+        username: user.username,
+        name: user.name,
+        email: user.email,
+        description: user.description,
+        category: user.category,
+        price: user.price || 3,
+        tags: user.tags || [],
+        imageUrl: user.imageUrl,
+        facebookUrl: user.facebookUrl,
+        instagramUrl: user.instagramUrl,
+        twitterUrl: user.twitterUrl,
+        location: user.location
       }
     });
 
@@ -39,7 +41,7 @@ export default function BusinessUpdateForm({ business }) {
   });
 
   const [inputValue, setInputValue] = useState('');
-  const [value, setValue] = useState(business.tags);
+  const [value, setValue] = useState(user.tags);
 
   const handleKeyDown = (event) => {
     if (!inputValue) return;
@@ -61,7 +63,7 @@ export default function BusinessUpdateForm({ business }) {
       setServerError();
       console.debug('Updating business...');
       updatedBusiness.location = updatedBusiness.location.location;
-      await businessesService.update( business, updatedBusiness);
+      await businessesService.update( user, updatedBusiness);
       navigate('/profile');
     } catch (error) {
         const errors = error.response?.data?.errors;
