@@ -4,7 +4,7 @@ const create = (business) => http.post('/businesses', business);
 
 const login = (business) => http.post('/login/businesses', business);
 
-const list = () => http.get('/businesses');
+const list = (query) => http.get('/businesses', {params: query});
 
 const get = (id) => http.get(`/businesses/${id}`);
 

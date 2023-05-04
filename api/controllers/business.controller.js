@@ -33,8 +33,23 @@ module.exports.confirm = (req, res, next) => {
 }
 
 module.exports.list = (req, res, next) => {
-  Business.find()
+  const criterial = {};
+
+  if (req.query.category) {
+    criterial.category = { $in: req.query.category }; 
+  }
+
+  if (req.query.tags) {
+    criterial.tags = { $in: req.query.tags }; 
+  }
+
+  if (req.query.price) {
+    criterial.price = { $in: req.query.price }; 
+  }
+
+  Business.find(criterial)
     .populate('favs reviews visits')
+    .sort({ createdAt: 'desc' })
     .then(businesses => res.json(businesses))
     .catch(next);
 };
