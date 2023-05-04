@@ -23,7 +23,7 @@ function App() {
           <Route path='/business/register' element={<BusinessRegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path='/profile' element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
-          <Route path='/negocio' element={<PrivateRoute role='business'><ProfilePage /></PrivateRoute>} />
+          {/* <Route path='/negocio' element={<PrivateRoute role='business'><ProfilePage /></PrivateRoute>} /> */}
           <Route path='/explora-madrid' element={<ExplorePage />} />
           <Route path='/explora-madrid/:businessId' element={<BusinessPage />} />
         </Routes>

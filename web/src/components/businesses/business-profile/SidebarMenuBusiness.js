@@ -9,7 +9,7 @@ export default function SidebarMenuBusiness({ isExpanded, user }) {
     <>
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">
-          <NavLink to="/profile" className={`nav-link ${renderNavLinkActive} ${isExpanded ? 'd-inline-block' : ''}`}>
+          <NavLink to="/profile/" className={`nav-link ${renderNavLinkActive} ${isExpanded ? 'd-inline-block' : ''}`}>
             <i className="fa-solid fa-store"></i>
             {isExpanded ? '' : <span className='mx-2'>Resumen</span>}
           </NavLink>

@@ -7,6 +7,8 @@ import BusinessCode from './BusinessCode';
 import BusinessFavs from './BusinessFavs';
 import BusinessVisits from './BusinessVisits';
 import BusinessResume from './BusinessResume';
+import ReactDOM from 'react-dom/client';
+import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 
 
 export default function BusinessProfile() {
@@ -24,13 +26,27 @@ export default function BusinessProfile() {
         </div>
       </div>
       <div className={expandSidebar ? 'col-sm-12 col-md-8 col-lg-11' : 'col-sm-12 col-md-8 col-lg-9'}>
+
+        {/* <Router>
+          <Routes>
+            <Route path='/profile/' element={<BusinessResume user={user} />} />
+            <Route path='/profile/code' element={<BusinessCode user={user} />} />
+            <Route path='/profile/business-favs' element={<BusinessFavs user={user} />} />
+            <Route path='/profile/business-reviews' element={<BusinessReviews user={user} />} />
+            <Route path='/profile/business-visits' element={<BusinessVisits user={user} />} />
+            <Route path='/profile/edit' element={<BusinessUpdateForm business={user} />} />
+          </Routes>
+        </Router> */}
+
+
+
         <BusinessResume user={user} />
         <BusinessCode user={user} />
-        {/* To do: gallery */}
         <BusinessFavs user={user} />
         <BusinessReviews user={user} />
         <BusinessVisits user={user} />
         <BusinessUpdateForm business={user} />
+        {/* To do: gallery */}
       </div>
     </div>
   )
