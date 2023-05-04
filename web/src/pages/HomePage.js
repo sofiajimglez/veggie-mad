@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import PageLayout from '../components/layout/PageLayout';
-import Header from '../components/home/Header';
+import Header from '../components/home/HeaderHome';
 import Categories from '../components/home/Categories';
 import BusinessBanner from '../components/home/BusinessBanner';
 import PointsBanner from '../components/home/PointsBanner';
 import { AuthContext } from '../contexts/AuthUserStore';
+import SocialMedia from '../components/home/SocialMedia';
 
 export default function HomePage() {
   const { user } = useContext(AuthContext);
@@ -16,6 +17,7 @@ export default function HomePage() {
         <Categories />
         <BusinessBanner />
         <PointsBanner user={user} />
+        <SocialMedia />
       </PageLayout>
     </>
   )

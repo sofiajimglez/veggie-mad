@@ -28,3 +28,14 @@
 .banner-img {
   width: 100%;
 }
+
+.social-icon {
+  cursor: pointer;
+  background-color: #A7C565;
+  border-radius: 10px;
+  color: whitesmoke;
+}
+
+.social-icon:hover {
+  background-color: #3A4523;
+}
