@@ -81,8 +81,8 @@ const businessSchema = new Schema({
     validate: {
       validator: validations.isValidUrl,
       message: 'La url de la imagen no es válida'
-    }
-    //TODO: default img
+    },
+    default: 'https://res.cloudinary.com/dorpbnltc/image/upload/v1683216043/veggie-mad/veggie-mad-business-default-img_tjfcro.jpg'
   },
   gallery: [{
     type: String,
