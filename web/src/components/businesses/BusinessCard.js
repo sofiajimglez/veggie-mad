@@ -10,7 +10,7 @@ export default function BusinessCard({ business, styles }) {
         <div className="card-body">
           <h5 className="card-title">{business.name}</h5>
           <p className="card-text mb-3">{business.category}</p>
-          {business?.tags.map(tag => <span className='business-card-tag me-2 pb-2 align-text-middle'>#{tag}</span>)}
+          {business?.tags.map((tag, i) => <span className='business-card-tag me-2 pb-2 align-text-middle' key={i}>#{tag}</span>)}
           <Link to={`/explora-madrid/${business.id}`} className="btn btn-main w-100 mt-3">Ver </Link>
         </div>
       </div>

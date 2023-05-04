@@ -35,6 +35,8 @@ module.exports.confirm = (req, res, next) => {
 module.exports.list = (req, res, next) => {
   const criterial = {};
 
+  console.log(req.query)
+
   if (req.query.category) {
     criterial.category = { $in: req.query.category }; 
   }

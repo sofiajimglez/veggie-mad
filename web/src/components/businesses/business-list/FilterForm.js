@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import businessService from '../../../services/businesses';
 import Select from 'react-select';
-import CreatableSelect from 'react-select/creatable';
 
-export default function FilterForm() {
+export default function FilterForm({ onSearch }) {
   const { handleSubmit, reset, setError, control, formState: { errors } } = useForm({ mode: 'onBlur' });
 
   const [serverError, setServerError] = useState();
@@ -19,37 +17,25 @@ export default function FilterForm() {
     { value: 5, label: '€€€€€' },
   ];
 
-// Tags config
-const components = { DropdownIndicator: null };
-const createOption = (label) => ({
-  label,
-  value: label,
-});
-
-const [inputValue, setInputValue] = useState('');
-const [value, setValue] = useState();
-
-const handleKeyDown = (event) => {
-  if (!inputValue) return;
-  switch (event.key) {
-    case 'Enter':
-    case 'Tab':
-      setValue((prev) => [...prev, createOption(inputValue)]);
-      setInputValue('');
-      event.preventDefault();
-      break;
-    default:
-      break;
-  }
-};
-// Ends tags config
+  const tagsOptions = [
+    { value: 'opciones veganas', label: 'opciones veganas' },
+    { value: 'pet-friendly', label: 'pet-friendly' },
+    { value: 'delivery', label: 'delivery' },
+    { value: 'peluquería', label: 'peluquería' },
+    { value: 'ecológico', label: 'ecológico' },
+    { value: 'km 0', label: 'km 0' },
+    { value: 'producto local', label: 'producto local' },
+    { value: 'vegetariano', label: 'vegetariano' },
+    { value: 'protectora', label: 'protectora' },
+    { value: 'segunda mano', label: 'segunda mano' },
+  ];
 
   const onSearchSubmit = async (query) => {
     try {
       setServerError();
       console.debug('Sending search request...');
       console.log('query', query);
-      await businessService.list(query);
+      onSearch(query);
       reset();
     } catch (error) {
       const errors = error.response?.data?.errors;
@@ -71,7 +57,7 @@ const handleKeyDown = (event) => {
 
       {/* Category */}
       <div className="col-sm-12 col-md-6 mb-3">
-        <label className="visually-hidden"htmlFor="inlineFormSelectPref">Preference</label>
+        <label className="visually-hidden" htmlFor="inlineFormSelectPref">Cetgoría</label>
         <Controller
           control={control}
           name='category'
@@ -90,7 +76,9 @@ const handleKeyDown = (event) => {
                 }),
               }}
               value={categoryOptions.find(option => option.value === value)}
-              onChange={(option) => onChange(option.value)}
+              onChange={(option) => {
+                onChange(option.map(opt => opt.value))
+              }}
             />
           )}
         />
@@ -98,36 +86,37 @@ const handleKeyDown = (event) => {
 
       {/* Tags */}
       <div className='col-sm-12 col-md-6 mb-3'>
+      <label className="visually-hidden" htmlFor="inlineFormSelectPref">Tags</label>
         <Controller
           control={control}
           name='tags'
-          render={() => (
-            <CreatableSelect
-              components={components}
-              inputValue={inputValue}
-              isClearable
+          render={({ field: { onChange, value, ref } }) => (
+            <Select
+              inputRef={ref}
+              placeholder='Selecciona las etiquetas'
+              className={`basic-multi-select form-control p-0 ${errors.tags ? 'is-invalid' : ''}`}
+              options={tagsOptions}
               isMulti
-              menuIsOpen={false}
-              onChange={(newValue) => setValue(newValue)}
-              onInputChange={(newValue) => setInputValue(newValue)}
-              onKeyDown={handleKeyDown}
-              placeholder="Etiquetas de búsqueda"
-              value={value}
+              classNamePrefix="Selecciona una categoría"
               styles={{
-                input: (baseStyles) => ({
+                control: (baseStyles) => ({
                   ...baseStyles,
-                  width: 'auto'
+                  border: 'none',
                 }),
+              }}
+              value={tagsOptions.find(option => option.value === value)}
+              onChange={(option) => {
+                onChange(option.map(opt => opt.value))
               }}
             />
           )}
         />
-        {errors.category && <p className='invalid-feedback'>{errors.category?.message}</p>}
+        {errors.tags && <p className='invalid-feedback'>{errors.tags?.message}</p>}
       </div>
 
       {/* Price */}
       <div className="col-sm-12 col-md-6">
-        <label className="visually-hidden"htmlFor="inlineFormSelectPref">Preference</label>
+        <label className="visually-hidden" htmlFor="inlineFormSelectPref">Price</label>
         <Controller
           control={control}
           name='price'
@@ -146,7 +135,7 @@ const handleKeyDown = (event) => {
                 }),
               }}
               value={priceOptions.find(option => option.value === value)}
-              onChange={(option) => onChange(option.value)}
+              onChange={(option) => onChange(option.map(x => x.value))}
             />
           )}
         />
