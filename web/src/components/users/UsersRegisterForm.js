@@ -163,7 +163,7 @@ export default function UsersRegisterForm() {
         {errors.privacy && <p className='invalid-feedback'>{errors.privacy?.message}</p>}
       </div>
 
-      <button type='submit' className='btn btn-primary w-100'>Crear cuenta</button>
+      <button type='submit' className='btn btn-second w-100'>Crear cuenta</button>
 
     </form>
   )

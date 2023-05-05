@@ -73,7 +73,7 @@ export default function UsersLoginForm({ mode }) {
         </div>
       </div>
 
-      <button type='submit' className='btn btn-primary w-100'>Acceder</button>
+      <button type='submit' className='btn btn-second-line w-100'>Acceder</button>
 
     </form>
   )

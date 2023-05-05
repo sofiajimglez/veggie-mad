@@ -162,3 +162,18 @@ footer {
   border: 1.5px solid #C45A8D;
   color: whitesmoke;
 }
+
+/* Login Register */
+.auth-img {
+  width: 22rem;
+}
+
+.auth-img-small {
+  width: 17rem;
+}
+
+.veggie-link {
+  text-decoration: none;
+  color: black;
+  border-radius: 10px;
+}
