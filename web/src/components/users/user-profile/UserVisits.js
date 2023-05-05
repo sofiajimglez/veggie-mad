@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import BusinessCard from '../../businesses/BusinessCard';
 import usersService from '../../../services/users';
+import { AuthContext } from '../../../contexts/AuthUserStore';
 
-export default function UserVisits({ user }) {
-
+export default function UserVisits() {
+  const { user } = useContext(AuthContext);
   const [visits, setVisits] = useState([]);
 
   useEffect(() => {

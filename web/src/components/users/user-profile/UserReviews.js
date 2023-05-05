@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import usersService from '../../../services/users';
 import ReviewCard from '../../reviews/ReviewCard';
+import { AuthContext } from '../../../contexts/AuthUserStore';
 
-export default function UserReviews({ user }) {
-
+export default function UserReviews() {
+  const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {

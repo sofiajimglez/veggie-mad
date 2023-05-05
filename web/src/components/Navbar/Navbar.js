@@ -42,7 +42,7 @@ export default function Navbar() {
           <div className='mx-3 d-flex gap-2 align-items-baseline'>
             {(user?.username) ? (
               <>
-                <Link to='/profile'>{user.username}</Link>
+                <Link to={`/${user?.role}-profile`}>{user.username}</Link>
                 <button className='btn btn-secondary' onClick={() => logout()}>Logout</button>
               </>
             ) : (

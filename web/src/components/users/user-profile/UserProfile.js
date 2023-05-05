@@ -8,7 +8,7 @@ import UserVisits from './UserVisits';
 import UserReviews from './UserReviews';
 import UsersUpdateForm from '../UsersUpdateForm';
 
-export default function UserProfile() {
+export default function UserProfile({ children }) {
 
   const { user } = useContext(AuthContext);
   const [expandSidebar, setExpandSidebar] = useState(false);
@@ -23,13 +23,7 @@ export default function UserProfile() {
         </div>
       </div>
       <div className={expandSidebar ? 'col-sm-12 col-md-8 col-lg-11' : 'col-sm-12 col-md-8 col-lg-9'}>
-        <UserResume user={user} />
-        <UserPoints user={user} />
-        <UserFavs user={user} />
-        <UserVisits user={user} />
-        <UserReviews user={user} />
-        <UsersUpdateForm user={user} />
-
+        { children }
       </div>
     </div>
   )

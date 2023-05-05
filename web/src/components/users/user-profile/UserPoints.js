@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthUserStore';
 
-export default function UserPoints({ user }) {
+export default function UserPoints() {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="d-flex flex-column justify-content-center align-items-start px-5">
       <h3 className='mb-4'>Mis puntos</h3>

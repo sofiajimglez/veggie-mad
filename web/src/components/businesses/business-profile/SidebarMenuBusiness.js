@@ -9,7 +9,7 @@ export default function SidebarMenuBusiness({ isExpanded, user }) {
     <>
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">
-          <NavLink to="/profile/" className={`nav-link sidebar-text ${renderNavLinkActive} ${isExpanded ? 'd-inline-block' : ''}`}>
+          <NavLink to="/business-profile" className={`nav-link sidebar-text ${renderNavLinkActive} ${isExpanded ? 'd-inline-block' : ''}`}>
             <i className="fa-solid fa-store"></i>
             {isExpanded ? '' : <span className='mx-2 '>Resumen</span>}
           </NavLink>
@@ -46,7 +46,7 @@ export default function SidebarMenuBusiness({ isExpanded, user }) {
         </li>
       </ul>
       <hr />
-      <Link to='/profile/edit' className='btn btn-second mb-2'>
+      <Link to='/profile/edit-business' className='btn btn-second mb-2'>
         <i className="fa-solid fa-pen-to-square"></i>
         {isExpanded ? '' : <span className='mx-2'>Editar info</span>}
       </Link>

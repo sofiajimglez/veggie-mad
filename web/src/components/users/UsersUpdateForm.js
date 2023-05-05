@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthUserStore';
 import { Controller, useForm } from 'react-hook-form';
 import usersService from '../../services/users';
 import GooglePlacesAutocomplete, { geocodeByPlaceId, getLatLng } from 'react-google-places-autocomplete';
 
-export default function UsersUpdateForm({ user }) {
+export default function UsersUpdateForm() {
+  const { user } = useContext(AuthContext);
+
   const { register, handleSubmit, setError, control, formState: { errors } } = useForm(
     {
       mode: 'onBlur',
@@ -152,7 +155,7 @@ export default function UsersUpdateForm({ user }) {
         </div>
       </div>
 
-      <button type='submit' className='btn btn-primary w-100'>Actualizar perfil</button>
+      <button type='submit' className='btn btn-main w-100'>Actualizar perfil</button>
 
     </form>
   )

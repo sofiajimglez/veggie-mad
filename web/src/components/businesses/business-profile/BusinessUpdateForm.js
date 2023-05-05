@@ -325,7 +325,7 @@ export default function BusinessUpdateForm() {
         </div>
       </div>
 
-      <button type='submit' className='btn btn-primary w-100'>Actualizar perfil</button>
+      <button type='submit' className='btn btn-main w-100'>Actualizar perfil</button>
 
     </form>
   )

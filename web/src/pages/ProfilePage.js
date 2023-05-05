@@ -9,7 +9,7 @@ export default function ProfilePage({ children }) {
 
   return (
     <PageLayout title="Bienvenido a tu espacio personal">
-      {user?.role === 'user' && <UserProfile />}
+      {user?.role === 'user' && <UserProfile>{ children }</UserProfile>}
       {user?.role === 'business' && <BusinessProfile>{ children }</BusinessProfile>}
     </PageLayout>
   )
