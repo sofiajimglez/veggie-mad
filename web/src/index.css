@@ -107,6 +107,20 @@ footer {
   color: whitesmoke;
 }
 
+.btn-main-reverse {
+  font-family: 'Quicksand', cursive;
+  font-weight: 600;
+  color: whitesmoke;
+  background-color: #3A4523;
+  border: 1.5px solid #3A4523;
+}
+
+.btn-main-reverse:hover {
+  background-color: #A7C565;
+  border: 1.5px solid #A7C565;
+  color: black;
+}
+
 .btn-second {
   font-family: 'Quicksand', cursive;
   font-weight: 600;

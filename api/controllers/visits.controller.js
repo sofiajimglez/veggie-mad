@@ -25,4 +25,24 @@ module.exports.create = (req, res, next) => {
           })
           .catch(next);
       }
-    })};
+    })
+};
+
+module.exports.checkVisit = (req, res, next) => {
+  const params = {
+    user: req.loggedUser.id,
+    business: req.business.id
+  };
+
+  Visit.findOne(params)
+    .then(visit => {
+      const result = {};
+      if (visit) {
+        result.isVisited = true;
+        res.status(201).json(result);
+      } else {
+        result.isVisited = false;
+        res.status(201).json(result);
+      };
+    })
+}

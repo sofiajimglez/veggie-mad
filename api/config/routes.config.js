@@ -29,8 +29,10 @@ router.patch('/businesses/:id', secure.businessAuth, businessMid.exists, busines
 router.delete('/businesses/:id', secure.businessAuth, businessMid.exists, businessMid.isOwned, businesses.delete);
 
 router.post('/businesses/:id/fav', secure.userAuth, businessMid.exists, fav.toggle);
+router.get('/businesses/:id/fav', secure.userAuth, businessMid.exists, fav.checkFav);
 
 router.post('/businesses/:id/visit', secure.userAuth, businessMid.exists, visit.create);
+router.get('/businesses/:id/visit', secure.userAuth, businessMid.exists, visit.checkVisit);
 
 router.post('/businesses/:id/review', secure.userAuth, businessMid.exists, review.create);
 router.patch('/businesses/:id/review/:reviewId', secure.userAuth, businessMid.exists, review.update);

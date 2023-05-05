@@ -24,3 +24,22 @@ module.exports.toggle = (req, res, next) => {
     })
     .catch(next);
 };
+
+module.exports.checkFav = (req, res, next) => {
+  const params = {
+    user: req.loggedUser.id,
+    business: req.business.id
+  };
+
+  Fav.findOne(params)
+    .then(fav => {
+      const result = {};
+      if (fav) {
+        result.isFav = true;
+        res.status(201).json(result);
+      } else {
+        result.isFav = false;
+        res.status(201).json(result);
+      };
+    })
+}

@@ -43,7 +43,7 @@ export default function ReviewForm({ business }) {
       {/* Rating */}
       <div className='mb-3'>
         <label htmlFor='price' className='form-label'>Puntuación</label>
-        <p id='location-helper' className='form-text fst-italic'>Selecciona un valor entre 1 (menor puntuación) y 5 (mayor puntuación)</p>
+        <p id='location-helper' className='form-text fst-italic'>Selecciona un valor entre 1 ⭐️ y 5 ⭐️⭐️⭐️⭐️⭐️</p>
         <input
           type='range'
           id='rating'
@@ -55,17 +55,16 @@ export default function ReviewForm({ business }) {
       </div>
 
       {/* Text */}
-      <div className='mb-3 form-floating'>
+      <div className='mb-3'>
         <textarea
           id='text'
           className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-          placeholder='Escribe tu reseña'
+          placeholder='¿Qué te ha parecido este sitio? Cuéntanos...'
           {...register('text', { required: 'El texto es obligatorio' })} />
-        <label htmlFor="floatingTextarea">Puedes escribir aquí tu reseña.</label>
       </div>
       {errors.text && <p className='invalid-feedback'>{errors.text?.message}</p>}
 
-      <button type='submit' className='btn btn-primary w-100'>Enviar</button>
+      <button type='submit' className='btn btn-second w-100 mb-3'>Enviar</button>
 
     </form>
   )
