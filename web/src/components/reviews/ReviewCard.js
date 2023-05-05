@@ -24,26 +24,26 @@ export default function ReviewCard({ review, user }) {
           `${review.user?.name} (@${review.user?.username})`}</h4>
 
         <h5>{renderStars(review.rating)}<span className='ms-2 fw-light fs-6'>{review.rating}/5</span></h5>
-        <hr />
+        <hr className='m-2' />
 
-        <p>{review.text}</p>
+        <p className='mb-2'>{review.text}</p>
 
-        <p className='fw-lighter fst-italic text-end fs-6 mb-0'>
+        <p className='fw-lighter fst-italic text-end small-text mb-0'>
           <i className="fa-regular fa-clock fa-xs me-2"></i>
           Publicada {dayjs(review.createdAt).fromNow()}
         </p>
 
-        {review.comments?.length > 0 && review.comments.map(comment => <div className="bg-light p-3 my-4 rounded" key={review.id}>
+        {review.comments?.length > 0 && review.comments.map(comment => <div className="bg-light p-3 my-2 rounded" key={review.id}>
           <h6>{user?.role === 'user' ? review.business?.name : user.name}</h6>
           <p className='mb-2'>{comment.text}</p>
-          <p className='fw-lighter fst-italic text-end fs-6 mb-0'>
+          <p className='fw-lighter fst-italic text-end mb-0 small-text'>
             <i className="fa-regular fa-clock fa-xs me-2"></i>
             Publicado {dayjs(review.createdAt).fromNow()}
           </p>
         </div>)}
 
         {user?.role === 'business'
-          && <button className='btn btn-primary mb-3' onClick={() => setSeeCommentForm(!seeCommentForm)}>Responder</button>}
+          && <button className='btn btn-second mb-1' onClick={() => setSeeCommentForm(!seeCommentForm)}>Responder</button>}
         {user?.role === 'business'
           && seeCommentForm
           && <CommentForm review={review.id} business={user.id} />}

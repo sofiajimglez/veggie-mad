@@ -46,7 +46,7 @@ export default function CommentForm({ review, business }) {
         <label htmlFor="floatingTextarea">Deja tu comentario...</label>
       </div>
 
-      <button type='submit' className='btn btn-primary w-100'>Enviar</button>
+      <button type='submit' className='btn btn-second-line w-100'>Enviar</button>
 
     </form>
   )

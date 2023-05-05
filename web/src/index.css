@@ -7,12 +7,15 @@ h1 {
   font-family: 'Lilita One', cursive;
 }
 
-h2, h3 {
+h2,
+h3 {
   font-family: 'Quicksand', cursive;
   font-weight: 700;
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
   font-family: 'Quicksand', cursive;
   font-weight: 600;
 }
@@ -32,6 +35,50 @@ p {
   margin-top: 5px;
   font-family: 'Plaster', cursive;
 }
+
+/* Profile */
+.nav-pills .nav-link.active,
+.nav-pills .nav-link.active:hover,
+.nav-pills .nav-link.active:focus {
+  background-color: #A7C565;
+  color: white;
+}
+
+.sidebar-text {
+  font-family: 'Quicksand', cursive;
+  font-weight: 600;
+  color: black !important;
+}
+
+.outline-pink-box {
+  background-color: transparent;
+  border: 2px solid #783153;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+
+.color-pink {
+  color: #C45A8D;
+}
+
+.bg-dark-green {
+  background-color: #3A4523;
+  color: whitesmoke;
+}
+
+.bg-dark-pink {
+  background-color: #783153;
+  color: whitesmoke;
+}
+
+.bg-light-pink {
+  background-color: #C45A8D;
+  color: whitesmoke;
+}
+
+.small-text {
+  font-size: 13px;
+}
+
 
 /* FOOTER */
 footer {
@@ -56,7 +103,7 @@ footer {
 
 .btn-main:hover {
   background-color: #3A4523;
-  border:1.5px solid #3A4523;
+  border: 1.5px solid #3A4523;
   color: whitesmoke;
 }
 
@@ -70,7 +117,7 @@ footer {
 
 .btn-second:hover {
   background-color: #783153;
-  border:1.5px solid #783153;
+  border: 1.5px solid #783153;
   color: whitesmoke;
 }
 
@@ -83,6 +130,21 @@ footer {
 }
 
 .btn-second-line:hover {
+  color: whitesmoke;
   background-color: #783153;
   border: 1.5px solid #783153;
+}
+
+.btn-second-reverse {
+  font-family: 'Quicksand', cursive;
+  font-weight: 600;
+  background-color: #783153;
+  border: 1.5px solid #783153;
+  color: whitesmoke;
+}
+
+.btn-second-reverse:hover {
+  background-color: #C45A8D;
+  border: 1.5px solid #C45A8D;
+  color: whitesmoke;
 }

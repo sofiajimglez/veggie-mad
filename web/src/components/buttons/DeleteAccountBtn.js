@@ -29,7 +29,7 @@ export default function DeleteAccountBtn({ isExpanded }) {
   }
 
   return (
-    <button className='btn btn-danger mb-2' onClick={() => handleDeleteClick()}>
+    <button className='btn btn-second-reverse mb-2' onClick={() => handleDeleteClick()}>
       <i className="fa-solid fa-trash-can"></i>
       {isExpanded ? '' : <span className='mx-2'>Eliminar cuenta</span>}
     </button>

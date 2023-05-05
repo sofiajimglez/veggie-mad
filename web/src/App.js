@@ -30,12 +30,14 @@ function App() {
           <Route path='/users/register' element={<UserRegisterPage />} />
           <Route path='/business/register' element={<BusinessRegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
+          
           <Route path='/profile' element={<PrivateRoute><ProfilePage><BusinessResume /></ProfilePage></PrivateRoute>} />
           <Route path='/profile/code' element={<PrivateRoute><ProfilePage><BusinessCode /></ProfilePage></PrivateRoute>} />
           <Route path='/profile/business-favs' element={<PrivateRoute><ProfilePage><BusinessFavs /></ProfilePage></PrivateRoute>} /> 
           <Route path='/profile/business-reviews' element={<PrivateRoute><ProfilePage><BusinessReviews /></ProfilePage></PrivateRoute>} /> 
           <Route path='/profile/business-visits' element={<PrivateRoute><ProfilePage><BusinessVisits /></ProfilePage></PrivateRoute>} /> 
-          <Route path='/profile/edit' element={<PrivateRoute><ProfilePage><BusinessUpdateForm /></ProfilePage></PrivateRoute>} /> 
+          <Route path='/profile/edit' element={<PrivateRoute><ProfilePage><BusinessUpdateForm /></ProfilePage></PrivateRoute>} />
+           
           {/* <Route path='/negocio' element={<PrivateRoute role='business'><ProfilePage /></PrivateRoute>} /> */}
           <Route path='/explora-madrid' element={<ExplorePage />} />
           <Route path='/explora-madrid/:businessId' element={<BusinessPage />} />

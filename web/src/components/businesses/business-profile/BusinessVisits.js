@@ -26,7 +26,7 @@ export default function BusinessVisits() {
       <h3 className='mb-4'>Mis visitas</h3>
       {visits.length > 0 ?
         <section>
-          <div className="alert alert-info w-100 mb-5">
+          <div className="alert bg-dark-pink w-100 mb-5">
             <h4 className="alert-heading"><i className="fa-solid fa-user"></i> {visits.length}</h4>
             <p className="mb-0">Ya estás en la lista de visitados de {visits.length} {visits.length < 2 ? 'usuario' : 'usuarios'}. ¡Sigue así! 😉 </p>
           </div>
@@ -39,7 +39,7 @@ export default function BusinessVisits() {
           </div>)}
         </section>
         :
-        <div className="alert alert-info w-100">
+        <div className="alert bg-light-pink w-100">
           <p className='mb-0 fw-lighter'>Aquí mostraremos el número de personas que marquen tu establecimiento como visitado. ¡Vuelve muy pronto! 😉</p>
         </div>
       }
