@@ -17,22 +17,22 @@ export default function UserResume() {
         </div>
       </div>
       <div className="d-flex flex-wrap justify-content-center align-items-center gap-3 p-5 py-3 mt-2">
-        <div className='d-flex flex-nowrap flex-column justify-content-center align-items-center gap-2 bg-success-subtle px-5 py-4 rounded'>
+        <div className='d-flex flex-nowrap flex-column justify-content-center align-items-center gap-2 px-5 py-4 rounded outline-pink-box'>
           <i className="fa-solid fa-xl fa-leaf my-3"></i>
           <h6 className='mb-0'>Puntos</h6>
           <h3 className='mb-0'>{user?.points}</h3>
         </div>
-        <div className='d-flex flex-nowrap flex-column justify-content-center align-items-center gap-2 bg-success-subtle px-5 py-4 rounded'>
+        <div className='d-flex flex-nowrap flex-column justify-content-center align-items-center gap-2 px-5 py-4 rounded outline-pink-box'>
           <i className="fa-solid fa-xl fa-heart my-3"></i>
           <h6 className='mb-0'>Favoritos</h6>
           <h3 className='mb-0'>{user?.favs?.length || 0 }</h3>
         </div>
-        <div className='d-flex flex-nowrap flex-column justify-content-center align-items-center gap-2 bg-success-subtle px-5 py-4 rounded'>
+        <div className='d-flex flex-nowrap flex-column justify-content-center align-items-center gap-2 px-5 py-4 rounded outline-pink-box'>
           <i className="fa-solid fa-xl fa-star my-3"></i>
           <h6 className='mb-0'>Reseñas</h6>
           <h3 className='mb-0'>{user?.reviews?.length || 0}</h3>
         </div>
-        <div className='d-flex flex-nowrap flex-column justify-content-center align-items-center gap-2 bg-success-subtle px-5 py-4 rounded'>
+        <div className='d-flex flex-nowrap flex-column justify-content-center align-items-center gap-2 px-5 py-4 rounded outline-pink-box'>
           <i className="fa-solid fa-xl fa-store my-3"></i>
           <h6 className='mb-0'>Visitados</h6>
           <h3 className='mb-0'>{user?.visits?.length || 0}</h3>

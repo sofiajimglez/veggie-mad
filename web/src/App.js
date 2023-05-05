@@ -23,10 +23,8 @@ import UserReviews from "./components/users/user-profile/UserReviews";
 import UserVisits from "./components/users/user-profile/UserVisits";
 import UserResume from "./components/users/user-profile/UserResume";
 
-
 function App() {
   
-
   return (
     <>
       <AuthUserStore>
