@@ -8,7 +8,7 @@ export default function UserResume() {
   return (
     <section>
       <div className="d-flex flex-wrap justify-content-center align-items-center gap-5 px-5 py-3">
-        <img src={user?.imageUrl} className="rounded-circle" alt={user?.username} />
+        <img src={user?.imageUrl} className="rounded-circle w-25" alt={user?.username} />
         <div className='d-flex flex-column justify-content-center gap-2'>
           <h2>{user?.name}</h2>
           <h5>@{user?.username}</h5>

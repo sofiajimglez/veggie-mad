@@ -15,7 +15,7 @@ export default function CommentForm({ review, business }) {
       reset();
       console.debug('Creating comment...');
       comment = await reviewService.comment(business, review, comment);
-      navigate('../profile', { replace: true });
+      navigate('../', { replace: true });
     } catch (error) {
       const errors = error.response?.data?.errors;
       if (errors) {

@@ -21,7 +21,7 @@ export default function ReviewForm({ business }) {
       reset();
       console.debug('Creating review...');
       review = await reviewService.create(business, review);
-      navigate('../profile', { replace: true });
+      navigate('../explora-madrid', { replace: true });
     } catch (error) {
       const errors = error.response?.data?.errors;
       if (errors) {

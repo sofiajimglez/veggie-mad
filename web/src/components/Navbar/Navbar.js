@@ -30,25 +30,26 @@ export default function Navbar() {
               <li className="nav-item"><NavLink to='/' className={renderNavLinkClassName}>Inicio</NavLink></li>
               <li className="nav-item"><NavLink to='/explora-madrid' className={renderNavLinkClassName}>Explora Madrid</NavLink></li>
               <li className="nav-item"><NavLink to='/sobre-veggie-mad' className={renderNavLinkClassName}>Sobre el proyecto</NavLink></li>
-              {user?.role === 'business' && <li><NavLink to='/negocio' className={renderNavLinkClassName}>Negocio</NavLink></li>}
+              {/* {user?.role === 'business' && <li><NavLink to='/negocio' className={renderNavLinkClassName}>Negocio</NavLink></li>} */}
             </ul>
-            <form className="d-flex" role="search">
+            {/* <form className="d-flex" role="search">
               <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
               <button className="btn btn-outline-success" type="submit">Search</button>
-            </form>
+            </form> */}
           </div>
 
           {/* Auth options */}
           <div className='mx-3 d-flex gap-2 align-items-baseline'>
             {(user?.username) ? (
               <>
-                <Link to={`/${user?.role}-profile`}>{user.username}</Link>
-                <button className='btn btn-secondary' onClick={() => logout()}>Logout</button>
+                {user?.role === 'user' && <h6 className='btn btn-second'><i class="fa-solid fa-seedling me-2"></i>{user?.points} puntos</h6>}
+                <Link to={`/${user?.role}-profile`} className='btn btn-main'><i class="fa-solid fa-user me-2"></i>Mi perfil</Link>
+                <button className='btn btn-secondary' onClick={() => logout()}>Salir <i class="fa-solid fa-right-from-bracket ms-2"></i></button>
               </>
             ) : (
               <>
-                <Link to='/users/register' className='btn btn-primary'>Registrarse</Link>
-                <Link to='/login' className='btn btn-primary'>Entrar</Link>
+                <Link to='/users/register' className='btn btn-main'>Registrarse</Link>
+                <Link to='/login' className='btn btn-second'>Entrar</Link>
               </>
             )}
           </div>

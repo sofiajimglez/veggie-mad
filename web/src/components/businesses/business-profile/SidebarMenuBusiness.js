@@ -20,12 +20,12 @@ export default function SidebarMenuBusiness({ isExpanded, user }) {
             {isExpanded ? '' : <span className='mx-2'>Mi código</span>}
           </NavLink>
         </li>
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <NavLink to="/profile/gallery" className={`nav-link sidebar-text ${renderNavLinkActive} ${isExpanded ? 'd-inline-block' : ''}`}>
             <i className="fa-solid fa-images"></i>
             {isExpanded ? '' : <span className='mx-2'>Mi galería</span>}
           </NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink to="/profile/business-favs" className={`nav-link sidebar-text ${renderNavLinkActive} ${isExpanded ? 'd-inline-block' : ''}`}>
             <i className="fa-solid fa-heart"></i>

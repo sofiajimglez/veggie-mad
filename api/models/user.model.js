@@ -61,8 +61,8 @@ const userSchema = new Schema({
     validate: {
       validator: validations.isValidUrl,
       message: 'La url de la imagen no es válida'
-    }
-    //TODO: default img
+    },
+    default: 'https://res.cloudinary.com/dorpbnltc/image/upload/v1683059271/veggie-mad/veggie-mad-default-avatar_t1tnnm.png'
   },
   privacy: {
     type: Boolean,

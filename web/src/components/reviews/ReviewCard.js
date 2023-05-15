@@ -14,8 +14,17 @@ function renderStars(num) {
   return stars;
 }
 
+
 export default function ReviewCard({ review, user }) {
   const [seeCommentForm, setSeeCommentForm] = useState(false);
+  
+  const isProfilePage = () => {
+    return window.location.href.includes('profile');
+  }
+
+  console.log(isProfilePage());
+
+
 
   return (
     <div className="card w-100 mb-4">
@@ -43,8 +52,10 @@ export default function ReviewCard({ review, user }) {
         </div>)}
 
         {user?.role === 'business' 
+          && isProfilePage()
           && <button className='btn btn-second mb-1' onClick={() => setSeeCommentForm(!seeCommentForm)}>Responder</button>}
         {user?.role === 'business' 
+          && isProfilePage()
           && seeCommentForm
           && <CommentForm review={review.id} business={user.id} />}
       </div>
