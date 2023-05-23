@@ -1,0 +1,24 @@
+# fly.toml app configuration file generated for veggie-mad on 2023-05-15T20:02:49+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "veggie-mad"
+primary_region = "mad"
+
+[env]
+  PORT=3001
+  MAX_SESSION_DAYS=5
+  USER_CONFIRMATION_REQUIRED=true
+  BUSINESS_CONFIRMATION_REQUIRED=true
+  NODEMAILER_USER='sofiajimglez@gmail.com'
+  API_URL='http://localhost:3001/api/v1'
+  WEB_URL='http://localhost:3000'
+  CORS_ORIGIN='http://localhost:3000'
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
