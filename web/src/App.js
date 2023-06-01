@@ -22,6 +22,7 @@ import UserFavs from "./components/users/user-profile/UserFavs";
 import UserReviews from "./components/users/user-profile/UserReviews";
 import UserVisits from "./components/users/user-profile/UserVisits";
 import UserResume from "./components/users/user-profile/UserResume";
+import AboutPage from "./pages/AboutPage";
 
 function App() {
   
@@ -34,6 +35,9 @@ function App() {
           <Route path='/users/register' element={<UserRegisterPage />} />
           <Route path='/business/register' element={<BusinessRegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path='/explora-madrid/:businessId' element={<BusinessPage />} />
+          <Route path='/explora-madrid' element={<ExplorePage />} />
+          <Route path='/sobre-veggie-mad' element={<AboutPage />} />
 
           <Route path='/business-profile' element={<PrivateRoute><ProfilePage><BusinessResume /></ProfilePage></PrivateRoute>} />
           <Route path='/profile/code' element={<PrivateRoute><ProfilePage><BusinessCode /></ProfilePage></PrivateRoute>} />
@@ -50,8 +54,6 @@ function App() {
           <Route path='/profile/edit-user' element={<PrivateRoute><ProfilePage><UsersUpdateForm /></ProfilePage></PrivateRoute>} />
            
           {/* <Route path='/negocio' element={<PrivateRoute role='business'><ProfilePage /></PrivateRoute>} /> */}
-          <Route path='/explora-madrid' element={<ExplorePage />} />
-          <Route path='/explora-madrid/:businessId' element={<BusinessPage />} />
         </Routes>
         <Footer />
       </AuthUserStore>
